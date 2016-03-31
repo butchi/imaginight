@@ -3,5 +3,37 @@ html {
 }
 
 body {
-  font-size: 2.4rem;
+  font-size: 1.4rem;
+}
+
+main {
+  .unit {
+    margin-top: 50px;
+    .player {
+      width: 200px;
+      float: left;
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .hp {
+        font-size: 1.4rem;
+      }
+
+      .power {
+        font-size: 1.0rem;
+      }
+    }
+
+    // clearfix
+    &:after {
+      content: "."; 
+      display: block; 
+      height: 0; 
+      font-size:0;  
+      clear: both; 
+      visibility:hidden;
+    }
+  }
 }

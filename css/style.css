@@ -2,5 +2,27 @@ html {
   font-size: 10px; }
 
 body {
-  font-size: 24px;
-  font-size: 2.4rem; }
+  font-size: 14px;
+  font-size: 1.4rem; }
+
+main .unit {
+  margin-top: 50px; }
+  main .unit .player {
+    width: 200px;
+    float: left; }
+    main .unit .player h2 {
+      font-size: 14px;
+      font-size: 1.4rem; }
+    main .unit .player .hp {
+      font-size: 14px;
+      font-size: 1.4rem; }
+    main .unit .player .power {
+      font-size: 10px;
+      font-size: 1.0rem; }
+  main .unit:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden; }
