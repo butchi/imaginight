@@ -71,7 +71,7 @@ gulp.task 'minify', () ->
 gulp.task 'deco', () ->
   gulp.src("#{DEST}/js/main.js")
     .pipe (decodecode
-      decoArr: ['s', 't', 'b']
+      decoArr: ['i', 'm', 'a', 'g']
     )
     .pipe (rename 'main.deco.js')
     .pipe (gulp.dest "#{DEST}/js")
