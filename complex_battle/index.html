@@ -8,13 +8,15 @@
 <body>
 <div id="panel1"></div>
 
-<button id="plus1">+1</button>
-<button id="minus1">-1</button>
-<button id="plusi">+i</button>
-<button id="minusi">-i</button>
-<button id="rot90">*i</button>
-<button id="rotm90">*(-i)</button>
-<button id="death">death</button>
+<select id="commandSelect">
+  <option value="plus">＋</option>
+  <option value="minus">－</option>
+  <option value="mult">×</option>
+  <option value="div">÷</option>
+  <option value="replace">＝</option>
+</select>
+
+<button id="attackBtn">攻撃</button>
 
 <script src="complex.js"></script>
 <script>
@@ -52,6 +54,15 @@ function always() {
   return true;
 }
 
+document.getElementById('attackBtn').addEventListener('click', function() {
+  exec(always,
+  function(x) {
+    console.log(document.getElementById('commandSelect').value);
+    return x.plus(new Complex(1, 0));
+  });
+});
+
+/*
 document.getElementById('plus1').addEventListener('click', function() {
   exec(always,
   function(x) {
@@ -96,6 +107,8 @@ document.getElementById('death').addEventListener('click', function() {
     return new Complex(0, 0);
   });
 });
+*/
+
 disp();
 
 function exec(condition, command) {
