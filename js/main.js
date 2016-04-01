@@ -264,7 +264,7 @@ function parseComplex(str) {
   var tmp = str.split(',');
   var re = parseInt(tmp[0]);
   var im = parseInt(tmp[1]);
-  return new _Complex2.default(re, im);
+  return (0, _Complex2.default)(re, im);
 }
 
 var Player = function () {

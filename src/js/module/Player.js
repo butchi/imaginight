@@ -4,7 +4,7 @@ function parseComplex(str) {
   var tmp = str.split(',');
   var re = parseInt(tmp[0]);
   var im = parseInt(tmp[1]);
-  return new Complex(re, im);
+  return Complex(re, im);
 }
 
 export default class Player {
