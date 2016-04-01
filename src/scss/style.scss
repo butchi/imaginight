@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 10px;
 }
@@ -7,33 +11,51 @@ body {
 }
 
 main {
-  .unit {
-    margin-top: 50px;
-    .player {
-      width: 200px;
-      float: left;
-
-      h2 {
-        font-size: 1.4rem;
-      }
-
-      .hp {
-        font-size: 1.4rem;
-      }
-
-      .power {
-        font-size: 1.0rem;
+  .stage {
+    &[data-phase="select"] {
+      .player:hover {
+        background-color: #fcc;
+        cursor: pointer;
       }
     }
 
-    // clearfix
-    &:after {
-      content: "."; 
-      display: block; 
-      height: 0; 
-      font-size:0;  
-      clear: both; 
-      visibility:hidden;
+    .party {
+      margin-top: 50px;
+      .player {
+        width: 200px;
+        height: 200px;
+        margin-left: 30px;
+        padding: 10px;
+        float: left;
+
+        border: 2px solid transparent;
+
+        &.active {
+          border-color: #f00;
+        }
+
+        h2 {
+          font-size: 2.4rem;
+        }
+
+        .hp {
+          font-size: 2.4rem;
+        }
+
+        .power {
+          font-size: 1.6rem;
+        }
+      }
+
+      // clearfix
+      &:after {
+        content: "."; 
+        display: block; 
+        height: 0; 
+        font-size:0;  
+        clear: both; 
+        visibility:hidden;
+      }
     }
   }
 }

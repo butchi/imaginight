@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box; }
+
 html {
   font-size: 10px; }
 
@@ -5,21 +8,31 @@ body {
   font-size: 14px;
   font-size: 1.4rem; }
 
-main .unit {
+main .stage[data-phase="select"] .player:hover {
+  background-color: #fcc;
+  cursor: pointer; }
+
+main .stage .party {
   margin-top: 50px; }
-  main .unit .player {
+  main .stage .party .player {
     width: 200px;
-    float: left; }
-    main .unit .player h2 {
-      font-size: 14px;
-      font-size: 1.4rem; }
-    main .unit .player .hp {
-      font-size: 14px;
-      font-size: 1.4rem; }
-    main .unit .player .power {
-      font-size: 10px;
-      font-size: 1.0rem; }
-  main .unit:after {
+    height: 200px;
+    margin-left: 30px;
+    padding: 10px;
+    float: left;
+    border: 2px solid transparent; }
+    main .stage .party .player.active {
+      border-color: #f00; }
+    main .stage .party .player h2 {
+      font-size: 24px;
+      font-size: 2.4rem; }
+    main .stage .party .player .hp {
+      font-size: 24px;
+      font-size: 2.4rem; }
+    main .stage .party .player .power {
+      font-size: 16px;
+      font-size: 1.6rem; }
+  main .stage .party:after {
     content: ".";
     display: block;
     height: 0;

@@ -1,88 +1,154 @@
-class Player {
-  constructor(opt) {
-    this.playerId = opt.playerId;
-    this.unitIndex = opt.unitIndex;
-    this.$unit = opt.$unit;
-    this.playerIndex = opt.playerIndex;
-    this.$elm = opt.$elm;
+import Player from './module/Player';
+import {CMath} from './module/CMath';
 
-    this.job = opt.job;
-
-    this.hp = parseComplex(opt.hp);
-    this.power = parseComplex(opt.power);
-
-    this.$elm.append(`<h2>${this.job}</h2>`);
-    this.$elm.append(`<div class="hp">${this.hp.re}, ${this.hp.im}</div>`);
-    this.$elm.append(`<div class="power">${this.power.re}, ${this.power.im}</div>`);
-  }
-
-  update() {
-    ;
-  }
+const phaseLi = {
+  SELECT: 'select',
+  ATTACK: 'attack',
 }
 
-window.Complex = class Complex {
-  constructor(re, im) {
-    this.re = re;
-    this.im = im;
+class MainController {
+  constructor() {
+    this.partyArr = [];
+    this.playerArr = [];
+    var playerId = 0;
+
+    this.$stage = $('.stage');
+
+    this.$stage.find('.party').each((partyIndex, partyElm) => {
+      this.partyArr[partyIndex] = [];
+
+      $(partyElm).find('.player').each((playerIndex, playerElm) => {
+        let $playerElm = $(playerElm);
+        let job = $playerElm.attr('data-job');
+        let hp = $playerElm.attr('data-hp');
+        let operation = $playerElm.attr('data-operation');
+        let power = $playerElm.attr('data-power');
+
+        let player = new Player({
+          playerId: playerId,
+          partyIndex: partyIndex,
+          $party: $(partyElm),
+          playerIndex: playerIndex,
+          $elm: $playerElm,
+          job: job,
+          hp: hp,
+          operation: operation,
+          power: power,
+        })
+
+        this.playerArr.push(player);
+        this.partyArr[partyIndex][playerIndex] = player;
+
+        playerId++;
+      });
+    });
+
+    this.start();
   }
-};
 
-function parseComplex(str) {
-  var tmp = str.split(',');
-  var re = parseInt(tmp[0]);
-  var im = parseInt(tmp[1]);
-  return new Complex(re, im);
+  reset() {
+    this.playerIndex = null;
+    this.currentPlayer = null;
+
+    this.currentPlayerIndex = null;
+
+    this.playerArr.forEach((player) => {
+      player.disactivate();
+    });
+  }
+
+  start() {
+    this.nextParty();
+  }
+
+  nextParty() {
+    this.phase = phaseLi.SELECT;
+    this.$stage.attr('data-phase', this.phase);
+
+    if(this.currentPartyIndex == null) {
+      this.currentPartyIndex = 0;
+    } else if(this.currentPartyIndex < this.partyArr.length - 1) {
+      this.currentPartyIndex++;
+    } else {
+      this.currentPartyIndex = 0;
+    }
+
+    this.attackArr = [];
+
+    this.nextPlayer();
+  }
+
+  nextPlayer() {
+    if(!this.phase) {
+    } else if(this.phase === phaseLi.SELECT) {
+      if(this.currentPlayerIndex == null) {
+        this.currentPlayerIndex = 0;
+      } else if(this.currentPlayerIndex < this.partyArr[this.currentPartyIndex].length - 1) {
+        this.currentPlayerIndex++;
+      } else {
+        $('.stage').off();
+        this.phase = phaseLi.ATTACK;
+        this.$stage.attr('data-phase', this.phase);
+
+        this.attack();
+
+        return;
+      }
+
+      this.prevPlayer = this.currentPlayer;
+      this.currentPlayer = this.partyArr[this.currentPartyIndex][this.currentPlayerIndex];
+
+      this.prevPlayer && this.prevPlayer.disactivate();
+      this.currentPlayer.activate();
+
+      $('.stage').one('click', '.player', (evt) => {
+        var playerId = $(evt.currentTarget).attr('data-player-id');
+        var selectedPlayer = this.playerArr[playerId];
+
+        let attack = {
+          attacker: this.currentPlayer,
+          target: selectedPlayer,
+          operation: selectedPlayer.operation,
+          operand: selectedPlayer.power,
+        }
+
+        this.attackArr.push(attack);
+
+        this.nextPlayer();
+      });
+    }
+  }
+
+  attack() {
+    this.reset();
+
+    this.attackArr.forEach((attack) => {
+      var attacker =  attack.attacker;
+      var target =    attack.target;
+      var operation = attack.operation;
+      var operand =   attack.operand;
+
+      var func;
+
+      if(!operation) {
+      } else if(operation === '+') {
+        func = CMath.sum;
+      } else if(operation === '-') {
+        func = CMath.sub;
+      } else if(operation === '*') {
+        func = CMath.mult;
+      }
+
+      target.hp = func(target.hp, operand);
+
+      target.update();
+    });
+
+    this.nextParty();
+  }
 }
-
-function clamp(x, max, min) {
-  return Math.max(Math.min(x, max), min);
-}
-
-window.sum = function sum(c1, c2) {
-  var re = clamp(c1.re + c2.re, 4, -4);
-  var im = clamp(c1.im + c2.im, 4, -4);
-
-  return new Complex(re, im);
-};
-
-window.sub = function sub(c1, c2) {
-  var re = clamp(c1.re - c2.re, 4, -4);
-  var im = clamp(c1.im - c2.im, 4, -4);
-
-  return new Complex(re, im);
-};
-
-window.mult = function mult(c1, c2) {
-  var re = clamp(c1.re * c2.re - c1.im * c2.im, 4, -4);
-  var im = clamp(c1.re * c2.im + c2.re * c1.im, 4, -4);
-
-  return new Complex(re, im);
-};
 
 window.licker = window.licker || {};
 ((ns) => {
-  var playerArr = [];
-  var playerId = 0;
-  $('.unit').each((unitIndex, unitElm) => {
-    $(unitElm).find('.player').each((playerIndex, playerElm) => {
-      let $playerElm = $(playerElm);
-      let job = $playerElm.attr('data-job');
-      let hp = $playerElm.attr('data-hp');
-      let power = $playerElm.attr('data-power');
-      let operation = $playerElm.attr('data-operation');
-      playerArr.push(new Player({
-        playerId: playerId,
-        unitIndex: unitIndex,
-        $unit: $(unitElm),
-        playerIndex: playerIndex,
-        $elm: $playerElm,
-        job: job,
-        hp: hp,
-        power: power,
-      }));
-
-      playerId++;
-    });
-  });
+  ns.mainController = new MainController();
 })(window.licker);
