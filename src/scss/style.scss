@@ -13,7 +13,7 @@ body {
 main {
   .stage {
     &[data-phase="select"] {
-      .player:hover {
+      .player[data-alive="1"]:hover {
         background-color: #fcc;
         cursor: pointer;
       }
@@ -32,6 +32,10 @@ main {
 
         &.active {
           border-color: #f00;
+        }
+
+        &[data-alive="0"] {
+          background-color: #ccc;
         }
 
         h2 {

@@ -1,4 +1,5 @@
 import Player from './module/Player';
+import Complex from './module/Complex'
 import {CMath} from './module/CMath';
 
 const phaseLi = {
@@ -101,15 +102,20 @@ class MainController {
       this.prevPlayer && this.prevPlayer.disactivate();
       this.currentPlayer.activate();
 
-      $('.stage').one('click', '.player', (evt) => {
+      if(!this.currentPlayer.isAlive) {
+        this.nextPlayer();
+        return;
+      }
+
+      $('.stage').one('click', '.player[data-alive="1"]', (evt) => {
         var playerId = $(evt.currentTarget).attr('data-player-id');
         var selectedPlayer = this.playerArr[playerId];
 
         let attack = {
           attacker: this.currentPlayer,
           target: selectedPlayer,
-          operation: selectedPlayer.operation,
-          operand: selectedPlayer.power,
+          operation: this.currentPlayer.operation,
+          operand: this.currentPlayer.power,
         }
 
         this.attackArr.push(attack);
@@ -139,8 +145,13 @@ class MainController {
         func = CMath.mult;
       }
 
-      target.hp = func(target.hp, operand);
+      if(target.isAlive) {
+        target.hp = func(target.hp, operand);
+      }
 
+      if(target.hp === Complex(0, 0)) {
+        target.isAlive = false;
+      }
       target.update();
     });
 

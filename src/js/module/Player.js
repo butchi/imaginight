@@ -4,6 +4,7 @@ function parseComplex(str) {
   var tmp = str.split(',');
   var re = parseInt(tmp[0]);
   var im = parseInt(tmp[1]);
+
   return Complex(re, im);
 }
 
@@ -20,6 +21,7 @@ export default class Player {
     this.hp = parseComplex(opt.hp);
     this.operation = opt.operation;
     this.power = parseComplex(opt.power);
+    this.isAlive = true;
 
     this.$elm.attr('data-player-id', this.playerId);
     this.$elm.attr('data-party-index', this.partyIndex);
@@ -33,6 +35,12 @@ export default class Player {
   }
 
   update() {
+    if(this.isAlive) {
+      this.$elm.attr('data-alive', 1);
+    } else {
+      this.$elm.attr('data-alive', 0);
+    }
+
     this.$elm.find('.hp').text(`HP: (${this.hp.re}, ${this.hp.im})`);
     this.$elm.find('.power').text(`POW: ${this.operation}(${this.power.re}, ${this.power.im})`);
   }

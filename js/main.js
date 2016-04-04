@@ -7,6 +7,10 @@ var _Player = require('./module/Player');
 
 var _Player2 = _interopRequireDefault(_Player);
 
+var _Complex = require('./module/Complex');
+
+var _Complex2 = _interopRequireDefault(_Complex);
+
 var _CMath = require('./module/CMath');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -123,15 +127,20 @@ var MainController = function () {
         this.prevPlayer && this.prevPlayer.disactivate();
         this.currentPlayer.activate();
 
-        $('.stage').one('click', '.player', function (evt) {
+        if (!this.currentPlayer.isAlive) {
+          this.nextPlayer();
+          return;
+        }
+
+        $('.stage').one('click', '.player[data-alive="1"]', function (evt) {
           var playerId = $(evt.currentTarget).attr('data-player-id');
           var selectedPlayer = _this2.playerArr[playerId];
 
           var attack = {
             attacker: _this2.currentPlayer,
             target: selectedPlayer,
-            operation: selectedPlayer.operation,
-            operand: selectedPlayer.power
+            operation: _this2.currentPlayer.operation,
+            operand: _this2.currentPlayer.power
           };
 
           _this2.attackArr.push(attack);
@@ -161,8 +170,13 @@ var MainController = function () {
           func = _CMath.CMath.mult;
         }
 
-        target.hp = func(target.hp, operand);
+        if (target.isAlive) {
+          target.hp = func(target.hp, operand);
+        }
 
+        if (target.hp === (0, _Complex2.default)(0, 0)) {
+          target.isAlive = false;
+        }
         target.update();
       });
 
@@ -178,7 +192,7 @@ window.licker = window.licker || {};
   ns.mainController = new MainController();
 })(window.licker);
 
-},{"./module/CMath":2,"./module/Player":4}],2:[function(require,module,exports){
+},{"./module/CMath":2,"./module/Complex":3,"./module/Player":4}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -201,21 +215,21 @@ var CMath = exports.CMath = {
     var re = CMath.clamp(c1.re + c2.re, 4, -4);
     var im = CMath.clamp(c1.im + c2.im, 4, -4);
 
-    return new _Complex2.default(re, im);
+    return (0, _Complex2.default)(re, im);
   },
 
   sub: function sub(c1, c2) {
     var re = CMath.clamp(c1.re - c2.re, 4, -4);
     var im = CMath.clamp(c1.im - c2.im, 4, -4);
 
-    return new _Complex2.default(re, im);
+    return (0, _Complex2.default)(re, im);
   },
 
   mult: function mult(c1, c2) {
     var re = CMath.clamp(c1.re * c2.re - c1.im * c2.im, 4, -4);
     var im = CMath.clamp(c1.re * c2.im + c2.re * c1.im, 4, -4);
 
-    return new _Complex2.default(re, im);
+    return (0, _Complex2.default)(re, im);
   }
 };
 
@@ -264,6 +278,7 @@ function parseComplex(str) {
   var tmp = str.split(',');
   var re = parseInt(tmp[0]);
   var im = parseInt(tmp[1]);
+
   return (0, _Complex2.default)(re, im);
 }
 
@@ -282,6 +297,7 @@ var Player = function () {
     this.hp = parseComplex(opt.hp);
     this.operation = opt.operation;
     this.power = parseComplex(opt.power);
+    this.isAlive = true;
 
     this.$elm.attr('data-player-id', this.playerId);
     this.$elm.attr('data-party-index', this.partyIndex);
@@ -297,6 +313,12 @@ var Player = function () {
   _createClass(Player, [{
     key: 'update',
     value: function update() {
+      if (this.isAlive) {
+        this.$elm.attr('data-alive', 1);
+      } else {
+        this.$elm.attr('data-alive', 0);
+      }
+
       this.$elm.find('.hp').text('HP: (' + this.hp.re + ', ' + this.hp.im + ')');
       this.$elm.find('.power').text('POW: ' + this.operation + '(' + this.power.re + ', ' + this.power.im + ')');
     }
