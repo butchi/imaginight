@@ -31,6 +31,18 @@ export default class Player {
     this.$elm.append(`<div class="hp"></div>`);
     this.$elm.append(`<div class="power"></div>`);
 
+    this.$mapHp = $(`<table class="map-hp"></table>`);
+    this.$elm.append(this.$mapHp);
+
+    for(let y = 4; y >= -4; y--) {
+      let $row = $(`<tr></tr>`);
+      this.$mapHp.append($row);
+      for(let x = -4; x <= 4; x++) {
+        let $cell = $(`<td class="cell" data-x="${x}" data-y="${y}"></td>`)
+        $row.append($cell);
+      }
+    }
+
     this.update();
   }
 
@@ -43,6 +55,11 @@ export default class Player {
 
     this.$elm.find('.hp').text(`HP: (${this.hp.re}, ${this.hp.im})`);
     this.$elm.find('.power').text(`POW: ${this.operation}(${this.power.re}, ${this.power.im})`);
+
+    this.$elm.find('.map-hp .cell')
+    .removeClass('cur')
+    .filter(`[data-x="${this.hp.re}"][data-y="${this.hp.im}"]`)
+    .addClass('cur');
   }
 
   activate() {

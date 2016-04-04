@@ -307,6 +307,18 @@ var Player = function () {
     this.$elm.append('<div class="hp"></div>');
     this.$elm.append('<div class="power"></div>');
 
+    this.$mapHp = $('<table class="map-hp"></table>');
+    this.$elm.append(this.$mapHp);
+
+    for (var y = 4; y >= -4; y--) {
+      var $row = $('<tr></tr>');
+      this.$mapHp.append($row);
+      for (var x = -4; x <= 4; x++) {
+        var $cell = $('<td class="cell" data-x="' + x + '" data-y="' + y + '"></td>');
+        $row.append($cell);
+      }
+    }
+
     this.update();
   }
 
@@ -321,6 +333,8 @@ var Player = function () {
 
       this.$elm.find('.hp').text('HP: (' + this.hp.re + ', ' + this.hp.im + ')');
       this.$elm.find('.power').text('POW: ' + this.operation + '(' + this.power.re + ', ' + this.power.im + ')');
+
+      this.$elm.find('.map-hp .cell').removeClass('cur').filter('[data-x="' + this.hp.re + '"][data-y="' + this.hp.im + '"]').addClass('cur');
     }
   }, {
     key: 'activate',
