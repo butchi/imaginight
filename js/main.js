@@ -152,35 +152,55 @@ var MainController = function () {
   }, {
     key: 'attack',
     value: function attack() {
+      var _this3 = this;
+
       this.reset();
 
-      this.attackArr.forEach(function (attack) {
-        var attacker = attack.attacker;
-        var target = attack.target;
-        var operation = attack.operation;
-        var operand = attack.operand;
+      var finalAttack = _.last(this.attackArr);
 
-        var func;
+      // promise notation from [JavaScriptのPromiseとarray.reduceを合わせて使う - yuw27b’s blog](http://yuw27b.hatenablog.com/entry/2015/09/30/235835)
+      var attackPromise = function attackPromise(attack) {
+        return new Promise(function (resolve) {
+          setTimeout(function () {
+            var attacker = attack.attacker;
+            var target = attack.target;
+            var operation = attack.operation;
+            var operand = attack.operand;
 
-        if (!operation) {} else if (operation === '+') {
-          func = _CMath.CMath.sum;
-        } else if (operation === '-') {
-          func = _CMath.CMath.sub;
-        } else if (operation === '*') {
-          func = _CMath.CMath.mult;
-        }
+            var func;
 
-        if (target.isAlive) {
-          target.hp = func(target.hp, operand);
-        }
+            if (!operation) {} else if (operation === '+') {
+              func = _CMath.CMath.sum;
+            } else if (operation === '-') {
+              func = _CMath.CMath.sub;
+            } else if (operation === '*') {
+              func = _CMath.CMath.mult;
+            }
 
-        if (target.hp === (0, _Complex2.default)(0, 0)) {
-          target.isAlive = false;
-        }
-        target.update();
-      });
+            if (target.isAlive) {
+              target.hp = func(target.hp, operand);
+            }
 
-      this.nextParty();
+            if (target.hp === (0, _Complex2.default)(0, 0)) {
+              target.isAlive = false;
+            }
+
+            target.update();
+
+            resolve();
+
+            if (attack === finalAttack) {
+              _this3.nextParty();
+            }
+          }, 1000);
+        });
+      };
+
+      this.attackArr.reduce(function (prevValue, currentValue) {
+        return prevValue.then(function () {
+          return attackPromise(currentValue);
+        });
+      }, Promise.resolve());
     }
   }]);
 

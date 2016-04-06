@@ -128,34 +128,52 @@ class MainController {
   attack() {
     this.reset();
 
-    this.attackArr.forEach((attack) => {
-      var attacker =  attack.attacker;
-      var target =    attack.target;
-      var operation = attack.operation;
-      var operand =   attack.operand;
+    var finalAttack = _.last(this.attackArr);
 
-      var func;
+    // promise notation from [JavaScriptのPromiseとarray.reduceを合わせて使う - yuw27b’s blog](http://yuw27b.hatenablog.com/entry/2015/09/30/235835)
+    var attackPromise = (attack) => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          var attacker =  attack.attacker;
+          var target =    attack.target;
+          var operation = attack.operation;
+          var operand =   attack.operand;
 
-      if(!operation) {
-      } else if(operation === '+') {
-        func = CMath.sum;
-      } else if(operation === '-') {
-        func = CMath.sub;
-      } else if(operation === '*') {
-        func = CMath.mult;
-      }
+          var func;
 
-      if(target.isAlive) {
-        target.hp = func(target.hp, operand);
-      }
+          if(!operation) {
+          } else if(operation === '+') {
+            func = CMath.sum;
+          } else if(operation === '-') {
+            func = CMath.sub;
+          } else if(operation === '*') {
+            func = CMath.mult;
+          }
 
-      if(target.hp === Complex(0, 0)) {
-        target.isAlive = false;
-      }
-      target.update();
-    });
+          if(target.isAlive) {
+            target.hp = func(target.hp, operand);
+          }
 
-    this.nextParty();
+          if(target.hp === Complex(0, 0)) {
+            target.isAlive = false;
+          }
+
+          target.update();
+
+          resolve();
+
+          if(attack === finalAttack) {
+            this.nextParty();
+          }
+        }, 1000);
+      })
+    }
+
+    this.attackArr.reduce((prevValue, currentValue) => {
+      return prevValue.then(() => {
+        return attackPromise(currentValue);
+      });
+    }, Promise.resolve());
   }
 }
 
