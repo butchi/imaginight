@@ -68,6 +68,10 @@ main {
 
             background-color: white;
 
+            &[data-x="0"][data-y="0"] {
+              background-color: #f99;
+            }
+
             &.cur {
               &:after {
                 content: "";

@@ -44,6 +44,8 @@ main .stage .party {
         padding: 0;
         border: 1px solid #ccc;
         background-color: white; }
+        main .stage .party .player .map-hp .cell[data-x="0"][data-y="0"] {
+          background-color: #f99; }
         main .stage .party .player .map-hp .cell.cur:after {
           content: "";
           position: absolute;
