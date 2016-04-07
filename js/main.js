@@ -184,13 +184,19 @@ var MainController = function () {
             target.isAlive = false;
           }
 
-          target.$elm.addClass('pick');
+          attacker.$elm.addClass('attacking');
+          attacker.$elm.on('transitionend', function (evt) {
+            setTimeout(function () {
+              attacker.$elm.removeClass('attacking');
+            }, 1000);
+          });
 
+          target.$elm.addClass('attacked');
           target.$elm.on('transitionend', function (evt) {
             target.update();
 
             setTimeout(function () {
-              target.$elm.removeClass('pick');
+              target.$elm.removeClass('attacked');
 
               setTimeout(function () {
                 resolve();

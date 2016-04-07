@@ -21,6 +21,18 @@ main {
 
     .party {
       margin-top: 50px;
+
+      &:nth-child(1) {
+        .player.attacking {
+          transform: translateY(20px);
+        }
+      }
+      &:nth-child(2) {
+        .player.attacking {
+          transform: translateY(-20px);
+        }
+      }
+
       .player {
         width: 200px;
         // height: 200px;
@@ -30,11 +42,17 @@ main {
 
         border: 2px solid transparent;
 
+        transition: transform 0.2s ease-in 0s;
+
         &.active {
           border-color: #f00;
         }
 
-        &.pick {
+        &.attacking {
+          transition: transform 0.2s ease-out 0s;
+        }
+
+        &.attacked {
           transform: scale(1.1);
           transition: transform 0.2s ease-out 0s;
         }

@@ -157,13 +157,20 @@ class MainController {
           target.isAlive = false;
         }
 
-        target.$elm.addClass('pick');
+        attacker.$elm.addClass('attacking');
+        attacker.$elm.on('transitionend', (evt) => {
+          setTimeout(() => {
+            attacker.$elm.removeClass('attacking');
+          }, 1000);
+        });
 
+
+        target.$elm.addClass('attacked');
         target.$elm.on('transitionend', (evt) => {
           target.update();
 
           setTimeout(() => {
-            target.$elm.removeClass('pick');
+            target.$elm.removeClass('attacked');
 
             setTimeout(() => {
               resolve();

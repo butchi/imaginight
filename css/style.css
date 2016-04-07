@@ -14,15 +14,26 @@ main .stage[data-phase="select"] .player[data-alive="1"]:hover {
 
 main .stage .party {
   margin-top: 50px; }
+  main .stage .party:nth-child(1) .player.attacking {
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px); }
+  main .stage .party:nth-child(2) .player.attacking {
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px); }
   main .stage .party .player {
     width: 200px;
     margin-left: 30px;
     padding: 10px;
     float: left;
-    border: 2px solid transparent; }
+    border: 2px solid transparent;
+    transition: -webkit-transform 0.2s ease-in 0s;
+    transition: transform 0.2s ease-in 0s; }
     main .stage .party .player.active {
       border-color: #f00; }
-    main .stage .party .player.pick {
+    main .stage .party .player.attacking {
+      transition: -webkit-transform 0.2s ease-out 0s;
+      transition: transform 0.2s ease-out 0s; }
+    main .stage .party .player.attacked {
       -webkit-transform: scale(1.1);
               transform: scale(1.1);
       transition: -webkit-transform 0.2s ease-out 0s;
