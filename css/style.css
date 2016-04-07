@@ -37,14 +37,24 @@ main .stage .party {
       border-collapse: collapse;
       font-size: 0; }
       main .stage .party .player .map-hp .cell {
+        position: relative;
         width: 20px;
         height: 20px;
         margin: 0;
         padding: 0;
-        border: 1px solid #333;
+        border: 1px solid #ccc;
         background-color: white; }
-        main .stage .party .player .map-hp .cell.cur {
-          background-color: #333; }
+        main .stage .party .player .map-hp .cell.cur:after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 12px;
+          height: 12px;
+          margin-left: -6px;
+          margin-top: -6px;
+          border-radius: 12px;
+          background-color: #666; }
   main .stage .party:after {
     content: ".";
     display: block;
