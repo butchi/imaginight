@@ -22,6 +22,11 @@ main .stage .party {
     border: 2px solid transparent; }
     main .stage .party .player.active {
       border-color: #f00; }
+    main .stage .party .player.pick {
+      -webkit-transform: scale(1.1);
+              transform: scale(1.1);
+      transition: -webkit-transform 0.2s ease-out 0s;
+      transition: transform 0.2s ease-out 0s; }
     main .stage .party .player[data-alive="0"] {
       background-color: #ccc; }
     main .stage .party .player h2 {

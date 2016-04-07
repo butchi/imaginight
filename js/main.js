@@ -161,38 +161,46 @@ var MainController = function () {
       // promise notation from [JavaScriptのPromiseとarray.reduceを合わせて使う - yuw27b’s blog](http://yuw27b.hatenablog.com/entry/2015/09/30/235835)
       var attackPromise = function attackPromise(attack) {
         return new Promise(function (resolve) {
-          setTimeout(function () {
-            var attacker = attack.attacker;
-            var target = attack.target;
-            var operation = attack.operation;
-            var operand = attack.operand;
+          var attacker = attack.attacker;
+          var target = attack.target;
+          var operation = attack.operation;
+          var operand = attack.operand;
 
-            var func;
+          var func;
 
-            if (!operation) {} else if (operation === '+') {
-              func = _CMath.CMath.sum;
-            } else if (operation === '-') {
-              func = _CMath.CMath.sub;
-            } else if (operation === '*') {
-              func = _CMath.CMath.mult;
-            }
+          if (!operation) {} else if (operation === '+') {
+            func = _CMath.CMath.sum;
+          } else if (operation === '-') {
+            func = _CMath.CMath.sub;
+          } else if (operation === '*') {
+            func = _CMath.CMath.mult;
+          }
 
-            if (target.isAlive) {
-              target.hp = func(target.hp, operand);
-            }
+          if (target.isAlive) {
+            target.hp = func(target.hp, operand);
+          }
 
-            if (target.hp === (0, _Complex2.default)(0, 0)) {
-              target.isAlive = false;
-            }
+          if (target.hp === (0, _Complex2.default)(0, 0)) {
+            target.isAlive = false;
+          }
 
+          target.$elm.addClass('pick');
+
+          target.$elm.on('transitionend', function (evt) {
             target.update();
 
-            resolve();
+            setTimeout(function () {
+              target.$elm.removeClass('pick');
 
-            if (attack === finalAttack) {
-              _this3.nextParty();
-            }
-          }, 1000);
+              setTimeout(function () {
+                resolve();
+              }, 600);
+            }, 1000);
+          });
+
+          if (attack === finalAttack) {
+            _this3.nextParty();
+          }
         });
       };
 

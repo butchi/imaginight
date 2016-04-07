@@ -133,41 +133,49 @@ class MainController {
     // promise notation from [JavaScriptのPromiseとarray.reduceを合わせて使う - yuw27b’s blog](http://yuw27b.hatenablog.com/entry/2015/09/30/235835)
     var attackPromise = (attack) => {
       return new Promise(resolve => {
-        setTimeout(() => {
-          var attacker =  attack.attacker;
-          var target =    attack.target;
-          var operation = attack.operation;
-          var operand =   attack.operand;
+        var attacker =  attack.attacker;
+        var target =    attack.target;
+        var operation = attack.operation;
+        var operand =   attack.operand;
 
-          var func;
+        var func;
 
-          if(!operation) {
-          } else if(operation === '+') {
-            func = CMath.sum;
-          } else if(operation === '-') {
-            func = CMath.sub;
-          } else if(operation === '*') {
-            func = CMath.mult;
-          }
+        if(!operation) {
+        } else if(operation === '+') {
+          func = CMath.sum;
+        } else if(operation === '-') {
+          func = CMath.sub;
+        } else if(operation === '*') {
+          func = CMath.mult;
+        }
 
-          if(target.isAlive) {
-            target.hp = func(target.hp, operand);
-          }
+        if(target.isAlive) {
+          target.hp = func(target.hp, operand);
+        }
 
-          if(target.hp === Complex(0, 0)) {
-            target.isAlive = false;
-          }
+        if(target.hp === Complex(0, 0)) {
+          target.isAlive = false;
+        }
 
+        target.$elm.addClass('pick');
+
+        target.$elm.on('transitionend', (evt) => {
           target.update();
 
-          resolve();
+          setTimeout(() => {
+            target.$elm.removeClass('pick');
 
-          if(attack === finalAttack) {
-            this.nextParty();
-          }
-        }, 1000);
-      })
-    }
+            setTimeout(() => {
+              resolve();
+            }, 600);
+          }, 1000);
+        });
+
+        if(attack === finalAttack) {
+          this.nextParty();
+        }
+      });
+    };
 
     this.attackArr.reduce((prevValue, currentValue) => {
       return prevValue.then(() => {
