@@ -25,4 +25,8 @@ export const CMath = {
 
     return Complex(re, im);
   },
+
+  abs: function(c) {
+    return Math.sqrt( (c.re*c.re)+(c.im*c.im) );
+  }
 };

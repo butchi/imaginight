@@ -138,6 +138,8 @@ class MainController {
         var operation = attack.operation;
         var operand =   attack.operand;
 
+        var gain;
+
         var func;
 
         if(!operation) {
@@ -150,7 +152,9 @@ class MainController {
         }
 
         if(target.isAlive) {
-          target.hp = func(target.hp, operand);
+          let hp = func(target.hp, operand);
+          gain = Math.sign(CMath.abs(hp) - CMath.abs(target.hp));
+          target.hp = hp;
         }
 
         if(target.hp === Complex(0, 0)) {
@@ -168,9 +172,26 @@ class MainController {
         target.$elm.addClass('attacked');
         target.$elm.on('transitionend', (evt) => {
           target.update();
+          // ダメージ色分け（バグあり）
+          // if(gain === 0) {
+          //   target.$elm.css({
+          //     "background-color": '#ff6',
+          //   });
+          // } else if(gain > 0) {
+          //   target.$elm.css({
+          //     "background-color": '#66f',
+          //   });
+          // } else if(gain < 0) {
+          //   target.$elm.css({
+          //     "background-color": '#f66',
+          //   });
+          // }
 
           setTimeout(() => {
             target.$elm.removeClass('attacked');
+            // target.$elm.css({
+            //   "background-color": 'transparent',
+            // });
 
             setTimeout(() => {
               resolve();

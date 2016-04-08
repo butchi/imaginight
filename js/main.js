@@ -166,6 +166,8 @@ var MainController = function () {
           var operation = attack.operation;
           var operand = attack.operand;
 
+          var gain;
+
           var func;
 
           if (!operation) {} else if (operation === '+') {
@@ -177,7 +179,9 @@ var MainController = function () {
           }
 
           if (target.isAlive) {
-            target.hp = func(target.hp, operand);
+            var hp = func(target.hp, operand);
+            gain = Math.sign(_CMath.CMath.abs(hp) - _CMath.CMath.abs(target.hp));
+            target.hp = hp;
           }
 
           if (target.hp === (0, _Complex2.default)(0, 0)) {
@@ -194,9 +198,26 @@ var MainController = function () {
           target.$elm.addClass('attacked');
           target.$elm.on('transitionend', function (evt) {
             target.update();
+            // ダメージ色分け（バグあり）
+            // if(gain === 0) {
+            //   target.$elm.css({
+            //     "background-color": '#ff6',
+            //   });
+            // } else if(gain > 0) {
+            //   target.$elm.css({
+            //     "background-color": '#66f',
+            //   });
+            // } else if(gain < 0) {
+            //   target.$elm.css({
+            //     "background-color": '#f66',
+            //   });
+            // }
 
             setTimeout(function () {
               target.$elm.removeClass('attacked');
+              // target.$elm.css({
+              //   "background-color": 'transparent',
+              // });
 
               setTimeout(function () {
                 resolve();
@@ -264,6 +285,10 @@ var CMath = exports.CMath = {
     var im = CMath.clamp(c1.re * c2.im + c2.re * c1.im, 4, -4);
 
     return (0, _Complex2.default)(re, im);
+  },
+
+  abs: function abs(c) {
+    return Math.sqrt(c.re * c.re + c.im * c.im);
   }
 };
 
