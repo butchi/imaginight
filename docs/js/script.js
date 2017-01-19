@@ -1,6 +1,173 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CMath = undefined;
+
+var _Complex = require('./Complex');
+
+var _Complex2 = _interopRequireDefault(_Complex);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CMath = exports.CMath = {
+  clamp: function clamp(x, max, min) {
+    return Math.max(Math.min(x, max), min);
+  },
+
+  sum: function sum(c1, c2) {
+    var re = CMath.clamp(c1.re + c2.re, 4, -4);
+    var im = CMath.clamp(c1.im + c2.im, 4, -4);
+
+    return (0, _Complex2.default)(re, im);
+  },
+
+  sub: function sub(c1, c2) {
+    var re = CMath.clamp(c1.re - c2.re, 4, -4);
+    var im = CMath.clamp(c1.im - c2.im, 4, -4);
+
+    return (0, _Complex2.default)(re, im);
+  },
+
+  mult: function mult(c1, c2) {
+    var re = CMath.clamp(c1.re * c2.re - c1.im * c2.im, 4, -4);
+    var im = CMath.clamp(c1.re * c2.im + c2.re * c1.im, 4, -4);
+
+    return (0, _Complex2.default)(re, im);
+  },
+
+  abs: function abs(c) {
+    return Math.sqrt(c.re * c.re + c.im * c.im);
+  }
+};
+
+},{"./Complex":2}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Complex;
+var complexTable = [];
+
+for (var re = -4; re <= 4; re++) {
+  complexTable[re] = [];
+  for (var im = -4; im <= 4; im++) {
+    complexTable[re][im] = {
+      re: re,
+      im: im
+    };
+  }
+}
+
+// newするより1つの数に1オブジェクト割り当てるようにすれば等号比較が楽？
+function Complex(re, im) {
+  return complexTable[re][im];
+}
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Complex = require('./Complex');
+
+var _Complex2 = _interopRequireDefault(_Complex);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function parseComplex(str) {
+  var tmp = str.split(',');
+  var re = parseInt(tmp[0]);
+  var im = parseInt(tmp[1]);
+
+  return (0, _Complex2.default)(re, im);
+}
+
+var Player = function () {
+  function Player(opt) {
+    _classCallCheck(this, Player);
+
+    this.playerId = opt.playerId;
+    this.partyIndex = opt.partyIndex;
+    this.$party = opt.$party;
+    this.playerIndex = opt.playerIndex;
+    this.$elm = opt.$elm;
+
+    this.job = opt.job;
+
+    this.hp = parseComplex(opt.hp);
+    this.operation = opt.operation;
+    this.power = parseComplex(opt.power);
+    this.isAlive = true;
+
+    this.$elm.attr('data-player-id', this.playerId);
+    this.$elm.attr('data-party-index', this.partyIndex);
+    this.$elm.attr('data-player-index', this.playerIndex);
+
+    this.$elm.append('<h2>' + this.job + '</h2>');
+    this.$elm.append('<div class="hp"></div>');
+    this.$elm.append('<div class="power"></div>');
+
+    this.$mapHp = $('<table class="map-hp"></table>');
+    this.$elm.append(this.$mapHp);
+
+    for (var y = 4; y >= -4; y--) {
+      var $row = $('<tr></tr>');
+      this.$mapHp.append($row);
+      for (var x = -4; x <= 4; x++) {
+        var $cell = $('<td class="cell" data-x="' + x + '" data-y="' + y + '"></td>');
+        $row.append($cell);
+      }
+    }
+
+    this.update();
+  }
+
+  _createClass(Player, [{
+    key: 'update',
+    value: function update() {
+      if (this.isAlive) {
+        this.$elm.attr('data-alive', 1);
+      } else {
+        this.$elm.attr('data-alive', 0);
+      }
+
+      this.$elm.find('.hp').text('HP: (' + this.hp.re + ', ' + this.hp.im + ')');
+      this.$elm.find('.power').text('POW: ' + this.operation + '(' + this.power.re + ', ' + this.power.im + ')');
+
+      this.$elm.find('.map-hp .cell').removeClass('cur').filter('[data-x="' + this.hp.re + '"][data-y="' + this.hp.im + '"]').addClass('cur');
+    }
+  }, {
+    key: 'activate',
+    value: function activate() {
+      this.$elm.addClass('active');
+      this.isActive = true;
+    }
+  }, {
+    key: 'disactivate',
+    value: function disactivate() {
+      this.$elm.removeClass('active');
+      this.isActive = false;
+    }
+  }]);
+
+  return Player;
+}();
+
+exports.default = Player;
+
+},{"./Complex":2}],4:[function(require,module,exports){
+'use strict';
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _Player = require('./module/Player');
@@ -247,171 +414,4 @@ window.licker = window.licker || {};
   ns.mainController = new MainController();
 })(window.licker);
 
-},{"./module/CMath":2,"./module/Complex":3,"./module/Player":4}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.CMath = undefined;
-
-var _Complex = require('./Complex');
-
-var _Complex2 = _interopRequireDefault(_Complex);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CMath = exports.CMath = {
-  clamp: function clamp(x, max, min) {
-    return Math.max(Math.min(x, max), min);
-  },
-
-  sum: function sum(c1, c2) {
-    var re = CMath.clamp(c1.re + c2.re, 4, -4);
-    var im = CMath.clamp(c1.im + c2.im, 4, -4);
-
-    return (0, _Complex2.default)(re, im);
-  },
-
-  sub: function sub(c1, c2) {
-    var re = CMath.clamp(c1.re - c2.re, 4, -4);
-    var im = CMath.clamp(c1.im - c2.im, 4, -4);
-
-    return (0, _Complex2.default)(re, im);
-  },
-
-  mult: function mult(c1, c2) {
-    var re = CMath.clamp(c1.re * c2.re - c1.im * c2.im, 4, -4);
-    var im = CMath.clamp(c1.re * c2.im + c2.re * c1.im, 4, -4);
-
-    return (0, _Complex2.default)(re, im);
-  },
-
-  abs: function abs(c) {
-    return Math.sqrt(c.re * c.re + c.im * c.im);
-  }
-};
-
-},{"./Complex":3}],3:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = Complex;
-var complexTable = [];
-
-for (var re = -4; re <= 4; re++) {
-  complexTable[re] = [];
-  for (var im = -4; im <= 4; im++) {
-    complexTable[re][im] = {
-      re: re,
-      im: im
-    };
-  }
-}
-
-// newするより1つの数に1オブジェクト割り当てるようにすれば等号比較が楽？
-function Complex(re, im) {
-  return complexTable[re][im];
-}
-
-},{}],4:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _Complex = require('./Complex');
-
-var _Complex2 = _interopRequireDefault(_Complex);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function parseComplex(str) {
-  var tmp = str.split(',');
-  var re = parseInt(tmp[0]);
-  var im = parseInt(tmp[1]);
-
-  return (0, _Complex2.default)(re, im);
-}
-
-var Player = function () {
-  function Player(opt) {
-    _classCallCheck(this, Player);
-
-    this.playerId = opt.playerId;
-    this.partyIndex = opt.partyIndex;
-    this.$party = opt.$party;
-    this.playerIndex = opt.playerIndex;
-    this.$elm = opt.$elm;
-
-    this.job = opt.job;
-
-    this.hp = parseComplex(opt.hp);
-    this.operation = opt.operation;
-    this.power = parseComplex(opt.power);
-    this.isAlive = true;
-
-    this.$elm.attr('data-player-id', this.playerId);
-    this.$elm.attr('data-party-index', this.partyIndex);
-    this.$elm.attr('data-player-index', this.playerIndex);
-
-    this.$elm.append('<h2>' + this.job + '</h2>');
-    this.$elm.append('<div class="hp"></div>');
-    this.$elm.append('<div class="power"></div>');
-
-    this.$mapHp = $('<table class="map-hp"></table>');
-    this.$elm.append(this.$mapHp);
-
-    for (var y = 4; y >= -4; y--) {
-      var $row = $('<tr></tr>');
-      this.$mapHp.append($row);
-      for (var x = -4; x <= 4; x++) {
-        var $cell = $('<td class="cell" data-x="' + x + '" data-y="' + y + '"></td>');
-        $row.append($cell);
-      }
-    }
-
-    this.update();
-  }
-
-  _createClass(Player, [{
-    key: 'update',
-    value: function update() {
-      if (this.isAlive) {
-        this.$elm.attr('data-alive', 1);
-      } else {
-        this.$elm.attr('data-alive', 0);
-      }
-
-      this.$elm.find('.hp').text('HP: (' + this.hp.re + ', ' + this.hp.im + ')');
-      this.$elm.find('.power').text('POW: ' + this.operation + '(' + this.power.re + ', ' + this.power.im + ')');
-
-      this.$elm.find('.map-hp .cell').removeClass('cur').filter('[data-x="' + this.hp.re + '"][data-y="' + this.hp.im + '"]').addClass('cur');
-    }
-  }, {
-    key: 'activate',
-    value: function activate() {
-      this.$elm.addClass('active');
-      this.isActive = true;
-    }
-  }, {
-    key: 'disactivate',
-    value: function disactivate() {
-      this.$elm.removeClass('active');
-      this.isActive = false;
-    }
-  }]);
-
-  return Player;
-}();
-
-exports.default = Player;
-
-},{"./Complex":3}]},{},[1]);
+},{"./module/CMath":1,"./module/Complex":2,"./module/Player":3}]},{},[4]);
