@@ -10,9 +10,6 @@ import browserify from 'browserify';
 import babelify from 'babelify';
 import debowerify from 'debowerify';
 import pug from 'gulp-pug';
-import rename from 'gulp-rename';
-import uglify from 'gulp-uglify';
-import decodecode from 'gulp-decodecode';
 import browserSync from 'browser-sync';
 import readConfig from 'read-config';
 import watch from 'gulp-watch';
@@ -85,8 +82,7 @@ gulp.task('browserify', () => {
   ;
 });
 
-// gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower-js'), gulp.parallel('minify', 'deco')));
-gulp.task 'js', gulp.parallel('browserify', 'copy-bower-js')
+gulp.task('js', gulp.parallel('browserify', 'copy-bower-js'));
 
 
 // html
