@@ -76,35 +76,17 @@ gulp.task('copy-bower-js', () => {
 });
 
 gulp.task('browserify', () => {
-  return browserify(`${SRC}/js/script.js`)
-    .transform(babelify)
+  return browserify(`${SRC}/js/app.jsx`, { debug: true })
+    .transform(babelify, {presets: ["react"]})
     .transform(debowerify)
     .bundle()
-    .pipe(source('script.js'))
+    .pipe(source('bundle.js'))
     .pipe(gulp.dest(`${DEST}/js`))
   ;
 });
 
-gulp.task('minify', () => {
-  return gulp.src(`${DEST}/js/script.js`)
-    .pipe(uglify({}))
-    .pipe(rename('script.min.js'))
-    .pipe(gulp.dest(`${DEST}/js`))
-  ;
-});
-
-gulp.task('deco', () => {
-  return gulp.src(`${DEST}/js/script.js`)
-    .pipe(decodecode({
-      decoArr: ['i', 'm', 'a', 'g'],
-    }))
-    .pipe(rename('script.deco.js'))
-    .pipe(gulp.dest(`${DEST}/js`))
-  ;
-});
-
-// gulp.task 'js', gulp.parallel('browserify', 'copy-bower-js')
-gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower-js'), gulp.parallel('minify', 'deco')));
+// gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower-js'), gulp.parallel('minify', 'deco')));
+gulp.task 'js', gulp.parallel('browserify', 'copy-bower-js')
 
 
 // html
@@ -112,7 +94,7 @@ gulp.task('pug', () => {
   const locals = readConfig(`${CONFIG}/meta.yml`);
   locals.versions = revLogger.versions();
 
-  return gulp.src([`${SRC}/pug/**/[!_]*.pug`, `!${SRC}/pug/_**/*`])
+  return gulp.src([`${SRC}/pug/**/[!_]*.pug`, `!${SRC}/pug/**/_*/**/*`])
     .pipe(pug({
       locals: locals,
       pretty: true,
@@ -135,7 +117,7 @@ gulp.task('browser-sync' , () => {
   });
 
   watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
-  watch([`${SRC}/js/**/*.js`], gulp.series('js', browserSync.reload));
+  watch([`${SRC}/js/**/*.jsx`], gulp.series('js', browserSync.reload));
   watch([
       `${SRC}/pug/**/*.pug`,
       `${SRC}/config/meta.yml`
