@@ -113,7 +113,7 @@ gulp.task('browser-sync' , () => {
   });
 
   watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
-  watch([`${SRC}/js/**/*.jsx`], gulp.series('js', browserSync.reload));
+  watch([`${SRC}/js/**/*`], gulp.series('js', browserSync.reload));
   watch([
       `${SRC}/pug/**/*.pug`,
       `${SRC}/config/meta.yml`

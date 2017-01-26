@@ -6,11 +6,12 @@ for(let re = -4; re <= 4; re++) {
     complexTable[re][im] = {
       re,
       im,
-    }
+      str: `(${re},${im})`
+    };
   }
 }
 
 // newするより1つの数に1オブジェクト割り当てるようにすれば等号比較が楽？
-export default function Complex(re, im) {
-  return complexTable[re][im];
+export default function Complex(arr) {
+  return complexTable[arr[0]][arr[1]];
 }

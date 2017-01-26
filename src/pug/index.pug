@@ -10,22 +10,10 @@ html(lang='ja')
         h1(data-heading-level='1')
           | Imaginight
       main
-        .stage
-          .party
-            .player(data-hp="4,0",  data-operation="-", data-power="1,0", data-job="night"    )
-            .player(data-hp="-4,0", data-operation="-", data-power="1,0", data-job="darknight")
-            .player(data-hp="0,3",  data-operation="*", data-power="0,1", data-job="magician" )
-            .player(data-hp="3,0",  data-operation="+", data-power="1,0", data-job="healer"   )
-          .party
-            .player(data-hp="4,0",  data-operation="-", data-power="1,0", data-job="night"    )
-            .player(data-hp="-4,0", data-operation="-", data-power="1,0", data-job="darknight")
-            .player(data-hp="0,2",  data-operation="*", data-power="0,1", data-job="magician" )
-            .player(data-hp="4,0",  data-operation="+", data-power="1,0", data-job="healer"   )
-
-    #container
+        .container
 
     script(src='js/lib/jquery.min.js')
     script(src='js/lib/lodash.min.js')
-    script(src='js/script.js')
+    //- script(src='js/script.js')
 
     script(src="js/bundle.js")

@@ -2,11 +2,10 @@
   box-sizing: border-box; }
 
 html {
-  font-size: 10px; }
+  font-size: 100px; }
 
 body {
-  font-size: 14px;
-  font-size: 1.4rem; }
+  font-size: 14px; }
 
 main .stage[data-phase="select"] .player[data-alive="1"]:hover {
   background-color: #fcc;
@@ -20,62 +19,6 @@ main .stage .party {
   main .stage .party:nth-child(2) .player.attacking {
     -webkit-transform: translateY(-20px);
             transform: translateY(-20px); }
-  main .stage .party .player {
-    width: 200px;
-    margin-left: 30px;
-    padding: 10px;
-    float: left;
-    border: 2px solid transparent;
-    transition: -webkit-transform 0.2s ease-in 0s;
-    transition: transform 0.2s ease-in 0s;
-    transition: transform 0.2s ease-in 0s, -webkit-transform 0.2s ease-in 0s; }
-    main .stage .party .player.active {
-      border-color: #f00; }
-    main .stage .party .player.attacking {
-      transition: -webkit-transform 0.2s ease-out 0s;
-      transition: transform 0.2s ease-out 0s;
-      transition: transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s; }
-    main .stage .party .player.attacked {
-      -webkit-transform: scale(1.1);
-              transform: scale(1.1);
-      transition: -webkit-transform 0.2s ease-out 0s;
-      transition: transform 0.2s ease-out 0s;
-      transition: transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s; }
-    main .stage .party .player[data-alive="0"] {
-      background-color: #ccc; }
-    main .stage .party .player h2 {
-      font-size: 24px;
-      font-size: 2.4rem; }
-    main .stage .party .player .hp {
-      font-size: 24px;
-      font-size: 2.4rem; }
-    main .stage .party .player .power {
-      font-size: 16px;
-      font-size: 1.6rem; }
-    main .stage .party .player .map-hp {
-      border-collapse: collapse;
-      font-size: 0; }
-      main .stage .party .player .map-hp .cell {
-        position: relative;
-        width: 20px;
-        height: 20px;
-        margin: 0;
-        padding: 0;
-        border: 1px solid #ccc;
-        background-color: white; }
-        main .stage .party .player .map-hp .cell[data-x="0"][data-y="0"] {
-          background-color: #f99; }
-        main .stage .party .player .map-hp .cell.cur:after {
-          content: "";
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          width: 12px;
-          height: 12px;
-          margin-left: -6px;
-          margin-top: -6px;
-          border-radius: 12px;
-          background-color: #666; }
   main .stage .party:after {
     content: ".";
     display: block;
@@ -83,3 +26,98 @@ main .stage .party {
     font-size: 0;
     clear: both;
     visibility: hidden; }
+
+.player {
+  width: 200px;
+  margin-left: 30px;
+  padding: 10px;
+  float: left;
+  border: 2px solid transparent;
+  transition: -webkit-transform 0.2s ease-in 0s;
+  transition: transform 0.2s ease-in 0s;
+  transition: transform 0.2s ease-in 0s, -webkit-transform 0.2s ease-in 0s; }
+  .player.active {
+    border-color: #f00; }
+  .player.attacking {
+    transition: -webkit-transform 0.2s ease-out 0s;
+    transition: transform 0.2s ease-out 0s;
+    transition: transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s; }
+  .player.attacked {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+    transition: -webkit-transform 0.2s ease-out 0s;
+    transition: transform 0.2s ease-out 0s;
+    transition: transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s; }
+  .player[data-alive="0"] {
+    background-color: #ccc; }
+  .player h2 {
+    font-size: 24px;
+    font-size: 0.24rem; }
+  .player .hp {
+    font-size: 24px;
+    font-size: 0.24rem; }
+  .player .power {
+    font-size: 16px;
+    font-size: 0.16rem; }
+  .player .map-hp {
+    position: relative;
+    width: 181px;
+    height: 181px;
+    background-image: url("../img/grid.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 0; }
+    .player .map-hp.center, .player .map-hp:before {
+      position: absolute;
+      left: 80px;
+      top: 80px;
+      width: 19px;
+      height: 19px;
+      background-color: #f99;
+      border: 1px solid #ccc; }
+    .player .map-hp:before {
+      content: ""; }
+    .player .map-hp .cur {
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      border-radius: 21px;
+      background-color: #000;
+      -webkit-transform: scale(0.5);
+              transform: scale(0.5); }
+    .player .map-hp[data-hp-real="-4"] .cur {
+      left: 0px; }
+    .player .map-hp[data-hp-real="-3"] .cur {
+      left: 20px; }
+    .player .map-hp[data-hp-real="-2"] .cur {
+      left: 40px; }
+    .player .map-hp[data-hp-real="-1"] .cur {
+      left: 60px; }
+    .player .map-hp[data-hp-real="0"] .cur {
+      left: 80px; }
+    .player .map-hp[data-hp-real="1"] .cur {
+      left: 100px; }
+    .player .map-hp[data-hp-real="2"] .cur {
+      left: 120px; }
+    .player .map-hp[data-hp-real="3"] .cur {
+      left: 140px; }
+    .player .map-hp[data-hp-real="4"] .cur {
+      left: 160px; }
+    .player .map-hp[data-hp-imag="-4"] .cur {
+      top: 160px; }
+    .player .map-hp[data-hp-imag="-3"] .cur {
+      top: 140px; }
+    .player .map-hp[data-hp-imag="-2"] .cur {
+      top: 120px; }
+    .player .map-hp[data-hp-imag="-1"] .cur {
+      top: 100px; }
+    .player .map-hp[data-hp-imag="0"] .cur {
+      top: 80px; }
+    .player .map-hp[data-hp-imag="1"] .cur {
+      top: 60px; }
+    .player .map-hp[data-hp-imag="2"] .cur {
+      top: 40px; }
+    .player .map-hp[data-hp-imag="3"] .cur {
+      top: 20px; }
+    .player .map-hp[data-hp-imag="4"] .cur {
+      top: 0px; }
