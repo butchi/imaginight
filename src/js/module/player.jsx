@@ -1,58 +1,12 @@
 import React from 'react';
 import Complex from './Complex';
+import CharacterLi from '../config/character-list';
 
 export default class Player extends React.Component {
   constructor(props) {
     super(props);
 
-    this.charaArr = [
-      {
-        name: "Knight",
-        hp: [4,0],
-        operator: "-",
-        power: [1,0],
-        job: "knight",
-        playerId: "0",
-        partyIndex: "0",
-        playerIndex: "0",
-        alive: "1",
-      },
-      {
-        name: "Dark Knight",
-        hp: [-4,0],
-        operator: "-",
-        power: [1,0],
-        job: "darkknight",
-        playerId: "0",
-        partyIndex: "0",
-        playerIndex: "0",
-        alive: "1",
-      },
-      {
-        name: "Magician",
-        hp: [0,3],
-        operator: "*",
-        power: [0,1],
-        job: "magician",
-        playerId: "0",
-        partyIndex: "0",
-        playerIndex: "0",
-        alive: "1",
-      },
-      {
-        name: "Healer",
-        hp: [3,0],
-        operator: "+",
-        power: [1,0],
-        job: "knight",
-        playerId: "0",
-        partyIndex: "0",
-        playerIndex: "0",
-        alive: "1",
-      },
-    ];
-
-    this.chara = this.charaArr[this.props.charaIndex];
+    this.chara = _.sample(CharacterLi);
   }
 
   render() {
