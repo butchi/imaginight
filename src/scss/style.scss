@@ -25,29 +25,31 @@ main {
       }
     }
 
-    .party {
-      margin-top: 50px;
+    margin-top: 50px;
 
-      &:nth-child(1) {
-        .player.attacking {
-          transform: translateY(20px);
-        }
-      }
-      &:nth-child(2) {
-        .player.attacking {
-          transform: translateY(-20px);
-        }
-      }
+    .player[data-attacking="1"] {
+      transform: translateY(20px);
+    }
 
-      // clearfix
-      &:after {
-        content: "."; 
-        display: block; 
-        height: 0; 
-        font-size:0;  
-        clear: both; 
-        visibility:hidden;
-      }
+    // &:nth-child(1) {
+    //   .player.attacking {
+    //     transform: translateY(20px);
+    //   }
+    // }
+    // &:nth-child(2) {
+    //   .player.attacking {
+    //     transform: translateY(-20px);
+    //   }
+    // }
+
+    // clearfix
+    &:after {
+      content: "."; 
+      display: block; 
+      height: 0; 
+      font-size:0;  
+      clear: both; 
+      visibility:hidden;
     }
   }
 }
@@ -63,15 +65,15 @@ main {
 
   transition: transform 0.2s ease-in 0s;
 
-  &.active {
+  &[data-active="1"] {
     border-color: #f00;
   }
 
-  &.attacking {
+  &[data-attacking="1"] {
     transition: transform 0.2s ease-out 0s;
   }
 
-  &.attacked {
+  &[data-attacked="1"] {
     transform: scale(1.1);
     transition: transform 0.2s ease-out 0s;
   }

@@ -6,14 +6,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
+
   handleChange(event) {
     this.setState({
     });
   }
+
   render() {
     return (
       <div className="app">
-        <Stage />
+        <Stage charaLen={8} />
       </div>
     );
   }
