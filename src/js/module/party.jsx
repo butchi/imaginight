@@ -7,13 +7,13 @@ export default class Party extends React.Component {
   }
 
   render() {
+    let playerArr = [];
+    for(let i = 0; i < this.props.charaLen; i++) {
+      playerArr.push(<Player key={i} onStateChange={this.onStateChange} charaIndex={i} />)
+    }
+
     return (
-      <div className="party" data-party-id={this.props.party}>
-        <Player onStateChange={this.onStateChange} charaIndex="0" />
-        <Player onStateChange={this.onStateChange} charaIndex="1" />
-        <Player onStateChange={this.onStateChange} charaIndex="2" />
-        <Player onStateChange={this.onStateChange} charaIndex="3" />
-      </div>
+      <div className="party" data-party-id={this.props.party}>{playerArr}</div>
     );
   }
 }

@@ -8,8 +8,8 @@ export default class Stage extends React.Component {
   render() {
     return (
       <div className="stage">
-        <Party partyId="0" charaLen="4" />
-        <Party partyId="1" charaLen="4" />
+        <Party partyId={0} charaLen={4} />
+        <Party partyId={1} charaLen={4} />
       </div>
     );
   }
