@@ -59,8 +59,6 @@ export default class Stage extends React.Component {
 
   next() {
     if(this.state.phase === 'attack') {
-      this.attack();
-
       return;
     }
 
@@ -72,27 +70,27 @@ export default class Stage extends React.Component {
         this.next();
       }
 
-      playerArr[this.state.currentPlayerIndex].active = false;
+      currentPlayer.active = false;
 
-      currentPlayer = this.state.playerArr[this.state.currentPlayerIndex + 1];
+      currentPlayer = this.state.playerArr[(this.state.currentPlayerIndex + 1) % this.props.charaLen];
 
       if(!currentPlayer) {
+      }
+
+      currentPlayer.active = true;
+
+      if(currentPlayer.party !== this.state.currentPartyIndex) {
+        this.setState ({
+          phase: 'attack',
+        });
+
+        this.attack();
+        return;
       }
 
       if(currentPlayer && currentPlayer.alive) {
         this.state.currentPlayerIndex++;
       }
-
-      playerArr[this.state.currentPlayerIndex].active = true;
-
-      if(currentPlayer.party !== this.state.currentPartyIndex) {
-        this.state.phase = 'attack';
-
-        this.next();
-        return;
-      }
-
-      this.state.currentPartyIndex = currentPlayer.party;
 
       this.setState({
         playerArr: playerArr,
@@ -103,6 +101,15 @@ export default class Stage extends React.Component {
   }
 
   reset() {
+    let playerArr = this.state.playerArr;
+
+    playerArr.forEach((player) => {
+      player.active = false;
+    });
+
+    this.setState({
+      playerArr,
+    });
   }
 
   attack() {
@@ -187,10 +194,12 @@ export default class Stage extends React.Component {
         }, 1000);
 
         if(attack === finalAttack) {
-          this.state.attackArr = [];
-          this.state.phase = 'select';
-          this.state.currentPartyIndex = (this.state.currentPartyIndex + 1) % 2;
-          this.state.currentPlayerIndex = 0;
+          this.setState({
+            phase: 'select',
+            currentPartyIndex: (this.state.currentPartyIndex + 1) % 2,
+            // currentPlayerIndex: (this.state.currentPlayerIndex + 1) % this.props.charaLen,
+            attackArr: [],
+          });
 
           this.next();
         }
@@ -241,7 +250,7 @@ export default class Stage extends React.Component {
 
   render() {
     return (
-      <div className="stage">
+      <div className="stage" data-phase={this.state.phase}>
         <PlayerList playerData={this.state.playerArr} onSelect={(player) => this.handleSelect(player)} />
       </div>
     );
