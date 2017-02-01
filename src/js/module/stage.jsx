@@ -3,6 +3,34 @@ import PlayerList from './player-list.jsx';
 import CharacterLi from '../config/character-list';
 import Complex from './Complex';
 import CMath from './CMath';
+import CommandPanel from './command-panel.jsx';
+
+const defaultAbility = {
+  left: {
+    "id": 'left',
+    "name": "闘う",
+    "operator": '+',
+    "power": [-1,0],
+  },
+  right: {
+    "id": 'right',
+    "name": "癒す",
+    "operator": '+',
+    "power": [1,0],
+  },
+  down: {
+    "id": 'down',
+    "name": "呪う",
+    "operator": '+',
+    "power": [0,-1],
+  },
+  up: {
+    "id": 'up',
+    "name": "祈る",
+    "operator": '+',
+    "power": [0,1],
+  },
+};
 
 export default class Stage extends React.Component {
   constructor(props) {
@@ -25,12 +53,6 @@ export default class Stage extends React.Component {
       player.attacked = false;
 
       playerArr.push(player);
-
-      // this.handleAddPlayer({
-      //   hp: player.hp,
-      //   operator: player.operator,
-      //   power: player.power,
-      // });
     }
 
     this.state = {
@@ -40,10 +62,13 @@ export default class Stage extends React.Component {
       currentPlayerIndex: null,
       attackArr: null,
       playerArr: playerArr,
+      ability: defaultAbility,
+      special: {},
+      command: {},
     };
   }
 
-  componentDidMount (){
+  componentDidMount() {
     this.state.currentPartyIndex = 0;
     this.state.currentPlayerIndex = 0;
 
@@ -54,50 +79,33 @@ export default class Stage extends React.Component {
 
     this.setState({
       playerArr: playerArr,
+      special: playerArr[this.state.currentPlayerIndex].special,
     });
   }
 
   next() {
-    if(this.state.phase === 'attack') {
-      return;
-    }
+    let playerArr = this.state.playerArr;
+    let currentPlayerIndex = this.state.currentPlayerIndex
+    let currentPlayer = this.state.playerArr[currentPlayerIndex];
 
-    if(this.state.phase === 'select') {
-      let playerArr = this.state.playerArr;
-      let currentPlayer = this.state.playerArr[this.state.currentPlayerIndex];
-
-      if(!currentPlayer.alive) {
-        this.next();
-      }
-
+    if(currentPlayer) {
       currentPlayer.active = false;
-
-      currentPlayer = this.state.playerArr[(this.state.currentPlayerIndex + 1) % this.props.charaLen];
-
-      if(!currentPlayer) {
-      }
-
-      currentPlayer.active = true;
-
-      if(currentPlayer.party !== this.state.currentPartyIndex) {
-        this.setState ({
-          phase: 'attack',
-        });
-
-        this.attack();
-        return;
-      }
-
-      if(currentPlayer && currentPlayer.alive) {
-        this.state.currentPlayerIndex++;
-      }
-
-      this.setState({
-        playerArr: playerArr,
-      });
-
-      return;
     }
+
+    do {
+      currentPlayerIndex = (currentPlayerIndex + 1) % this.props.charaLen;
+      currentPlayer = this.state.playerArr[currentPlayerIndex];
+    } while (!currentPlayer.alive);
+
+    currentPlayer.active = true;
+
+    this.setState({
+      playerArr,
+      currentPlayerIndex,
+      special: currentPlayer.special,
+    });
+
+    return;
   }
 
   reset() {
@@ -222,36 +230,42 @@ export default class Stage extends React.Component {
       return;
     }
 
+    let anchor = _.findLast(this.state.playerArr, { party: this.state.currentPartyIndex });
+
     let attacker = this.state.playerArr[this.state.currentPlayerIndex];
 
     let attack = {
       attacker: attacker,
       target: target,
-      operator: attacker.operator,
-      operand: attacker.power,
+      operator: this.state.command.operator || this.state.special.operator,
+      operand: this.state.command.power || this.state.special.power,
     };
 
     this.state.attackArr.push(attack);
 
-    this.next();
+    if(attacker.index === anchor.index) {
+      this.setState ({
+        phase: 'attack',
+      });
+
+      this.attack();
+      return;
+    } else {
+      this.next();
+    }
   }
 
-  // handleAddPlayer(player = {}) {
-  //   let data = this.state.playerData;
-  //   data.push({
-  //     hp: player.hp,
-  //     operator: player.operator,
-  //     power: player.power,
-  //   });
-  //   this.setState({
-  //     playerData: data,
-  //   });
-  // }
+  handleCommand(command) {
+    this.state.command = command;
+  }
 
   render() {
     return (
-      <div className="stage" data-phase={this.state.phase}>
-        <PlayerList playerData={this.state.playerArr} onSelect={(player) => this.handleSelect(player)} />
+      <div>
+        <div className="stage" data-phase={this.state.phase}>
+          <PlayerList playerData={this.state.playerArr} onSelect={(player) => this.handleSelect(player)} />
+        </div>
+        <CommandPanel ability={this.state.ability} special={this.state.special} onCommand={(command) => this.handleCommand(command)} />
       </div>
     );
   }
