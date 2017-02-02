@@ -55,7 +55,7 @@ const CharacterLi = [
     },
   },
   {
-    name: "神父",
+    name: "神官",
     hp: [2,0],
     job: "Priest",
     special: {
