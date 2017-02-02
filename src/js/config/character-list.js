@@ -11,7 +11,7 @@ const CharacterLi = [
     hp: [4,0],
     job: "Knight",
     special: {
-      name: "稲妻突き",
+      name: "剣技",
       func: normalFunc({
         operator: '-',
         power: [2,0],
@@ -56,7 +56,7 @@ const CharacterLi = [
   },
   {
     name: "神父",
-    hp: [3,0],
+    hp: [2,0],
     job: "Priest",
     special: {
       name: "完全蘇生",
