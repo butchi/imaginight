@@ -17,8 +17,8 @@ main .stage {
     background-color: #fcc;
     cursor: pointer; }
   main .stage .player[data-attacking="1"] {
-    -webkit-transform: translateY(20px);
-            transform: translateY(20px); }
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px); }
   main .stage:after {
     content: ".";
     display: block;

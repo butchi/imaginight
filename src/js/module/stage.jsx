@@ -83,7 +83,7 @@ export default class Stage extends React.Component {
       playerArr,
       currentPlayerIndex,
       special: currentPlayer.special,
-      command: (this.state.command.type === 'default') ? this.state.command : currentPlayer.special,
+      command: (this.state.command && this.state.command.type === 'default') ? this.state.command : currentPlayer.special,
     });
 
     return;
@@ -208,7 +208,7 @@ export default class Stage extends React.Component {
     let attack = {
       attacker: attacker,
       target: target,
-      command: this.state.command || this.attacker.special,
+      command: this.state.command || attacker.special,
     };
 
     this.state.attackArr.push(attack);

@@ -34,7 +34,7 @@ main {
     margin-top: 50px;
 
     .player[data-attacking="1"] {
-      transform: translateY(20px);
+      transform: translateY(-20px);
     }
 
     // &:nth-child(1) {
