@@ -13,7 +13,7 @@ body {
 
 main .stage {
   margin-top: 50px; }
-  main .stage[data-phase="select"] .player[data-alive="1"]:hover {
+  main .stage[data-phase="select"] .player:hover {
     background-color: #fcc;
     cursor: pointer; }
   main .stage .player[data-attacking="1"] {

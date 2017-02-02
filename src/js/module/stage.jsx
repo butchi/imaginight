@@ -136,6 +136,8 @@ export default class Stage extends React.Component {
 
         if(Complex(target.hp) === Complex([0, 0])) {
           target.alive = false;
+        } else {
+          target.alive = true;
         }
 
         setTimeout(() => {
@@ -195,10 +197,6 @@ export default class Stage extends React.Component {
   }
 
   handleSelect(target) {
-    if(!target.alive) {
-      return;
-    }
-
     if(this.state.phase === 'attack') {
       return;
     }

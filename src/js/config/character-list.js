@@ -54,21 +54,21 @@ const CharacterLi = [
       }),
     },
   },
-  // {
-  //   name: "Priest",
-  //   hp: [3,0],
-  //   job: "Priest",
-  //   special: {
-  //     name: "蘇生",
-  //     func: specialFunc({
-  //       condition: (opts = {}) => {
-  //         return !!opts.target.alive;
-  //       },
-  //       calc: _.noop,
-  //     }),
-  //     desc: '戦闘不能のHPを(4,0)にする',
-  //   }
-  // },
+  {
+    name: "Priest",
+    hp: [3,0],
+    job: "Priest",
+    special: {
+      name: "完全蘇生",
+      func: specialFunc({
+        condition: (opts) => {
+          return !opts.target.alive;
+        },
+        calc: () => { return [4,0]; },
+      }),
+      desc: '戦闘不能のHPを(4,0)にする',
+    }
+  },
 ];
 
 export default CharacterLi;

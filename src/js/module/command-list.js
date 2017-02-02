@@ -126,6 +126,17 @@ const CommandLi = {
         "power": [0,1],
       }),
     },
+    restore: {
+      "id": 'restore',
+      "type": 'default',
+      "name": "蘇生",
+      "func": specialFunc({
+        condition: (opts) => {
+          return !opts.target.alive;
+        },
+        calc: () => { return [1,0]; },
+      }),
+    },
   },
 
   normalFunc,

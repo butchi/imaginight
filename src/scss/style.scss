@@ -25,7 +25,7 @@ body {
 main {
   .stage {
     &[data-phase="select"] {
-      .player[data-alive="1"]:hover {
+      .player:hover {
         background-color: #fcc;
         cursor: pointer;
       }
