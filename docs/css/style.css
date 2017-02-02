@@ -11,27 +11,31 @@ body {
   font-family: "Averia Serif Libre", cursive;
   font-size: 48px; }
 
-main .stage {
-  margin-top: 50px; }
-  main .stage[data-phase="select"] .player:hover {
-    background-color: #fcc;
-    cursor: pointer; }
-  main .stage .player[data-attacking="1"] {
-    -webkit-transform: translateY(-20px);
-            transform: translateY(-20px); }
-  main .stage:after {
-    content: ".";
-    display: block;
-    height: 0;
-    font-size: 0;
-    clear: both;
-    visibility: hidden; }
+main {
+  width: 1000px; }
+  main .stage {
+    margin-top: 50px; }
+    main .stage[data-phase="select"] .player:hover {
+      background-color: #fcc;
+      cursor: pointer; }
+    main .stage .player[data-attacking="1"] {
+      -webkit-transform: translateY(-20px);
+              transform: translateY(-20px); }
+    main .stage:after {
+      content: ".";
+      display: block;
+      height: 0;
+      font-size: 0;
+      clear: both;
+      visibility: hidden; }
 
 .player {
+  width: 204px;
   margin-left: 30px;
   padding: 10px;
   float: left;
   border: 2px solid transparent;
+  background-color: #fff;
   transition: -webkit-transform 0.2s ease-in 0s;
   transition: transform 0.2s ease-in 0s;
   transition: transform 0.2s ease-in 0s, -webkit-transform 0.2s ease-in 0s; }
@@ -120,3 +124,34 @@ main .stage {
       top: 20px; }
     .player .map-hp[data-hp-imag="4"] .cur {
       top: 0px; }
+
+.command-panel {
+  position: relative; }
+  .command-panel .left {
+    position: absolute;
+    left: 0px;
+    top: 30px; }
+  .command-panel .right {
+    position: absolute;
+    left: 120px;
+    top: 30px; }
+  .command-panel .down {
+    position: absolute;
+    left: 60px;
+    top: 60px; }
+  .command-panel .up {
+    position: absolute;
+    left: 60px;
+    top: 0px; }
+  .command-panel .restore {
+    position: absolute;
+    left: 60px;
+    top: 30px; }
+  .command-panel .special {
+    position: absolute;
+    left: 0;
+    top: 100px; }
+  .command-panel .desc {
+    position: absolute;
+    left: 0;
+    top: 130px; }

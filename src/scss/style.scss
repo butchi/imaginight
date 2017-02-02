@@ -58,16 +58,21 @@ main {
       visibility:hidden;
     }
   }
+
+  // MAGIC NUMBER: 4つに区切る
+  width: 1000px;
 }
 
 .player {
-  // width: 200px;
+  width: 204px;
   // height: 200px;
   margin-left: 30px;
   padding: 10px;
   float: left;
 
   border: 2px solid transparent;
+
+  background-color: #fff;
 
   transition: transform 0.2s ease-in 0s;
 
@@ -159,5 +164,53 @@ main {
         }
       }
     }
+  }
+}
+
+.command-panel {
+  position: relative;
+
+  .left {
+    position: absolute;
+    left: 0px;
+    top: 30px;
+  }
+
+  .right {
+    position: absolute;
+    left: 120px;
+    top: 30px;
+  }
+
+  .down {
+    position: absolute;
+    left: 60px;
+    top: 60px;
+  }
+
+  .up {
+    position: absolute;
+    left: 60px;
+    top: 0px;
+  }
+
+  .restore {
+    position: absolute;
+    left: 60px;
+    top: 30px;
+  }
+
+  .special {
+    position: absolute;
+
+    left: 0;
+    top: 100px;
+  }
+
+  .desc {
+    position: absolute;
+
+    left: 0;
+    top: 130px;
   }
 }
