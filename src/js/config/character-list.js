@@ -57,7 +57,7 @@ const CharacterLi = [
   {
     name: "暗黒魔道士",
     hp: [-3,0],
-    job: "Magician",
+    job: "Dark Mage",
     special: {
       name: "属性逆変化",
       func: normalFunc({
@@ -125,7 +125,7 @@ const CharacterLi = [
       name: "投獄",
       func: normalFunc({
         operator: '-',
-        power: [2,0],
+        power: [3,0],
       }),
     },
   },

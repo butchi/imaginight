@@ -5,6 +5,7 @@ import Complex from './Complex';
 import CMath from './CMath';
 import CommandPanel from './command-panel.jsx';
 import CommnadLi from './command-list';
+import CommnadIndex from './command-index.jsx';
 
 export default class Stage extends React.Component {
   constructor(props) {
@@ -235,6 +236,7 @@ export default class Stage extends React.Component {
         <div className="stage" data-phase={this.state.phase}>
           <PlayerList playerData={this.state.playerArr} onSelect={(player) => this.handleSelect(player)} />
         </div>
+        <CommnadIndex characterLi={CharacterLi} />
         <CommandPanel ability={this.state.ability} special={this.state.special} onCommand={(command) => this.handleCommand(command)} />
       </div>
     );
