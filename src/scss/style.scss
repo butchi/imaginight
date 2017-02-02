@@ -1,18 +1,20 @@
-$base-font-size: 14px;
+$rem-per-px : 100;
+
+@function px($size) {
+  @return #{$size / $rem-per-px}rem;
+}
+
+$base-font-size: px(14);
 $cursive: 'Averia Serif Libre', cursive;
 
 $gray: #999;
-
-@function px($size) {
-  @return #{$size / 100}rem;
-}
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-size: 100px;
+  font-size: #{$rem-per-px * 0.7}px;
 }
 
 body {
@@ -23,11 +25,19 @@ body {
   margin: 0;
 
   font-family: $cursive;
-  font-size: 48px;
+  font-size: px(48);
 }
 
 main {
   .stage {
+    position: absolute;
+
+    left: 0;
+    top: px(50);
+
+    // MAGIC NUMBER: 4つに区切る
+    width: px(1000);
+
     &[data-phase="select"] {
       .player:hover {
         background-color: #fcc;
@@ -35,10 +45,10 @@ main {
       }
     }
 
-    margin-top: 20px;
+    margin-top: px(20);
 
     .player[data-attacking="1"] {
-      transform: translateY(-20px);
+      transform: translateY(px(-20));
     }
 
     // &:nth-child(1) {
@@ -54,27 +64,24 @@ main {
 
     // clearfix
     &:after {
-      content: "."; 
-      display: block; 
-      height: 0; 
-      font-size:0;  
-      clear: both; 
-      visibility:hidden;
+      content: ".";
+      display: block;
+      height: 0;
+      font-size: 0;
+      clear: both;
+      visibility: hidden;
     }
   }
-
-  // MAGIC NUMBER: 4つに区切る
-  width: 1000px;
 }
 
 .player {
-  width: 204px;
+  width: px(204);
   // height: 200px;
-  margin-left: 30px;
-  padding: 10px;
+  margin-left: px(30);
+  padding: px(10);
   float: left;
 
-  border: 2px solid transparent;
+  border: px(2) solid transparent;
 
   background-color: #fff;
 
@@ -121,8 +128,8 @@ main {
   .map-hp {
     position: relative;
 
-    width: 181px;
-    height: 181px;
+    width: px(181);
+    height: px(181);
 
     background-image: url("../img/grid.png");
     background-size: cover;
@@ -133,11 +140,11 @@ main {
     &.center {
       position: absolute;
 
-      left: 80px;
-      top: 80px;
+      left: px(80);
+      top: px(80);
 
-      width: 19px;
-      height: 19px;
+      width: px(19);
+      height: px(19);
 
       background-color: #f99;
 
@@ -153,9 +160,9 @@ main {
     .cur {
       position: absolute;
 
-      width: 21px;
-      height: 21px;
-      border-radius: 21px;
+      width: px(21);
+      height: px(21);
+      border-radius: px(21);
 
       background-color: #000;
 
@@ -165,7 +172,7 @@ main {
     @for $x from -4 through 4 {
       &[data-hp-real="#{$x}"] {
         .cur {
-          left: ($x + 4) * 20px;
+          left: px(($x + 4) * 20);
         }
       }
     }
@@ -173,57 +180,80 @@ main {
     @for $y from -4 through 4 {
       &[data-hp-imag="#{$y}"] {
         .cur {
-          top: (- $y + 4) * 20px;
+          top: px((- $y + 4) * 20);
         }
       }
     }
   }
 }
 
+.command-index {
+  position: absolute;
+
+  left: px(1000);
+  top: px(50);
+
+  .command {
+    + .command {
+      margin-top: px(10);
+    }
+  }
+
+  .job {
+    font-weight: bold;
+    font-size: px(16);
+  }
+}
+
 .command-panel {
-  position: relative;
+  position: absolute;
+
+  left: px(40);
+  top: px(700);
+
+  width: px(300);
 
   .left {
     position: absolute;
-    left: 0px;
-    top: 30px;
+    left: px(0);
+    top: px(30);
   }
 
   .right {
     position: absolute;
-    left: 120px;
-    top: 30px;
+    left: px(120);
+    top: px(30);
   }
 
   .down {
     position: absolute;
-    left: 60px;
-    top: 60px;
+    left: px(60);
+    top: px(60);
   }
 
   .up {
     position: absolute;
-    left: 60px;
-    top: 0px;
+    left: px(60);
+    top: px(0);
   }
 
   .restore {
     position: absolute;
-    left: 60px;
-    top: 30px;
+    left: px(60);
+    top: px(30);
   }
 
   .special {
     position: absolute;
 
     left: 0;
-    top: 100px;
+    top: px(100);
   }
 
   .desc {
     position: absolute;
 
     left: 0;
-    top: 130px;
+    top: px(130);
   }
 }
