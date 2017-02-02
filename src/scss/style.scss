@@ -20,6 +20,8 @@ body {
 }
 
 .title {
+  margin: 0;
+
   font-family: $cursive;
   font-size: 48px;
 }
@@ -33,7 +35,7 @@ main {
       }
     }
 
-    margin-top: 50px;
+    margin-top: 20px;
 
     .player[data-attacking="1"] {
       transform: translateY(-20px);

@@ -8,13 +8,14 @@ body {
   font-size: 14px; }
 
 .title {
+  margin: 0;
   font-family: "Averia Serif Libre", cursive;
   font-size: 48px; }
 
 main {
   width: 1000px; }
   main .stage {
-    margin-top: 50px; }
+    margin-top: 20px; }
     main .stage[data-phase="select"] .player:hover {
       background-color: #fcc;
       cursor: pointer; }
