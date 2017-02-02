@@ -146,24 +146,26 @@ export default class Stage extends React.Component {
           func = CMath.mult;
         }
 
-        if(target.alive) {
-          let hp = func(Complex(target.hp), Complex(operand));
-          gain = Math.sign(CMath.abs(hp) - CMath.abs(Complex(target.hp)));
-          target.hp = [hp.re, hp.im];
+        let playerArr = this.state.playerArr;
+
+        if(attacker.alive) {
+          if(target.alive) {
+            let hp = func(Complex(target.hp), Complex(operand));
+            gain = Math.sign(CMath.abs(hp) - CMath.abs(Complex(target.hp)));
+            target.hp = [hp.re, hp.im];
+          }
+
+          playerArr[attacker.index].attacking = true;
+          playerArr[target.index].attacked = true;
+
+          this.setState({
+            playerArr,
+          });
         }
 
         if(Complex(target.hp) === Complex([0, 0])) {
           target.alive = false;
         }
-
-        let playerArr = this.state.playerArr;
-
-        playerArr[attacker.index].attacking = true;
-        playerArr[target.index].attacked = true;
-
-        this.setState({
-          playerArr,
-        });
 
         setTimeout(() => {
           playerArr[attacker.index].attacking = false;
