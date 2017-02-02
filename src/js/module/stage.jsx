@@ -230,7 +230,7 @@ export default class Stage extends React.Component {
       return;
     }
 
-    let anchor = _.findLast(this.state.playerArr, { party: this.state.currentPartyIndex });
+    let anchor = _.findLast(this.state.playerArr, { party: this.state.currentPartyIndex, alive: true });
 
     let attacker = this.state.playerArr[this.state.currentPlayerIndex];
 
