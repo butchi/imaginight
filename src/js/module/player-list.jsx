@@ -12,7 +12,7 @@ export default class PlayerList extends React.Component {
 
   render() {
     let PlayerNodes = this.props.playerData.map((player, index) => {
-      return <Player party={player.party} name={player.name} hp={player.hp} operator={player.special.operator} power={player.special.power} alive={player.alive} active={player.active} attacking={player.attacking} attacked={player.attacked} onSelect={() => this.handleSelect(player)} key={index} />;
+      return <Player party={player.party} name={player.name} hp={player.hp} operator={player.special.operator} special={player.special.name} alive={player.alive} active={player.active} attacking={player.attacking} attacked={player.attacked} onSelect={() => this.handleSelect(player)} key={index} />;
     });
 
     return (

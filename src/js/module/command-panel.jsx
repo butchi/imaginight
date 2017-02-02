@@ -39,6 +39,7 @@ export default class CommandPanel extends React.Component {
       <div className="command-panel">
         {commandElmArr}
         <label key={0}><input type="radio" ref="command" value="special" checked={this.state.command.id === 'special'} onChange={() => this.handleChange('special')} /> {this.props.special.name}</label>
+        <div>{this.props.special.name}: {this.props.special.desc}</div>
       </div>
     );
   }

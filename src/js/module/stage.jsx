@@ -4,33 +4,7 @@ import CharacterLi from '../config/character-list';
 import Complex from './Complex';
 import CMath from './CMath';
 import CommandPanel from './command-panel.jsx';
-
-const defaultAbility = {
-  left: {
-    "id": 'left',
-    "name": "闘う",
-    "operator": '+',
-    "power": [-1,0],
-  },
-  right: {
-    "id": 'right',
-    "name": "癒す",
-    "operator": '+',
-    "power": [1,0],
-  },
-  down: {
-    "id": 'down',
-    "name": "呪う",
-    "operator": '+',
-    "power": [0,-1],
-  },
-  up: {
-    "id": 'up',
-    "name": "祈る",
-    "operator": '+',
-    "power": [0,1],
-  },
-};
+import CommnadLi from './command-list';
 
 export default class Stage extends React.Component {
   constructor(props) {
@@ -62,9 +36,9 @@ export default class Stage extends React.Component {
       currentPlayerIndex: null,
       attackArr: null,
       playerArr: playerArr,
-      ability: defaultAbility,
+      ability: CommnadLi.defaultAbility,
       special: {},
-      command: {},
+      command: null,
     };
   }
 
@@ -75,11 +49,15 @@ export default class Stage extends React.Component {
     this.state.attackArr = [];
 
     let playerArr =  this.state.playerArr;
-    playerArr[this.state.currentPlayerIndex].active = true;
+
+    let player = playerArr[this.state.currentPlayerIndex];
+    player.active = true;
+
+    player.special.desc = player.special.desc || player.special.func.desc;
 
     this.setState({
       playerArr: playerArr,
-      special: playerArr[this.state.currentPlayerIndex].special,
+      special: player.special,
     });
   }
 
@@ -99,10 +77,13 @@ export default class Stage extends React.Component {
 
     currentPlayer.active = true;
 
+    currentPlayer.special.desc = currentPlayer.special.desc || currentPlayer.special.func.desc;
+
     this.setState({
       playerArr,
       currentPlayerIndex,
       special: currentPlayer.special,
+      command: (this.state.command.type === 'default') ? this.state.command : currentPlayer.special,
     });
 
     return;
@@ -130,30 +111,20 @@ export default class Stage extends React.Component {
       return new Promise(resolve => {
         var attacker =  attack.attacker;
         var target =    attack.target;
-        var operator = attack.operator;
-        var operand =   attack.operand;
+        var command =   attack.command;
 
-        var gain;
-
-        var func;
-
-        if(!operator) {
-        } else if(operator === '+') {
-          func = CMath.sum;
-        } else if(operator === '-') {
-          func = CMath.sub;
-        } else if(operator === '*') {
-          func = CMath.mult;
-        }
+        // var gain;
 
         let playerArr = this.state.playerArr;
 
         if(attacker.alive) {
-          if(target.alive) {
-            let hp = func(Complex(target.hp), Complex(operand));
-            gain = Math.sign(CMath.abs(hp) - CMath.abs(Complex(target.hp)));
-            target.hp = [hp.re, hp.im];
-          }
+          let result = command.func({
+            target,
+            attacker,
+          });
+
+          // gain = Math.sign(CMath.abs(result.hp) - CMath.abs(Complex(target.hp)));
+          target.hp = result.hp || target.hp;
 
           playerArr[attacker.index].attacking = true;
           playerArr[target.index].attacked = true;
@@ -239,8 +210,7 @@ export default class Stage extends React.Component {
     let attack = {
       attacker: attacker,
       target: target,
-      operator: this.state.command.operator || this.state.special.operator,
-      operand: this.state.command.power || this.state.special.power,
+      command: this.state.command || this.attacker.special,
     };
 
     this.state.attackArr.push(attack);
