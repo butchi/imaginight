@@ -7,6 +7,10 @@ html {
 body {
   font-size: 14px; }
 
+.title {
+  font-family: "Averia Serif Libre", cursive;
+  font-size: 48px; }
+
 main .stage {
   margin-top: 50px; }
   main .stage[data-phase="select"] .player[data-alive="1"]:hover {
@@ -24,7 +28,6 @@ main .stage {
     visibility: hidden; }
 
 .player {
-  width: 200px;
   margin-left: 30px;
   padding: 10px;
   float: left;

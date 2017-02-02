@@ -1,4 +1,5 @@
 $base-font-size: 14px;
+$cursive: 'Averia Serif Libre', cursive;
 
 @function px($size) {
   @return #{$size / 100}rem;
@@ -14,6 +15,11 @@ html {
 
 body {
   font-size: $base-font-size;
+}
+
+.title {
+  font-family: $cursive;
+  font-size: 48px;
 }
 
 main {
@@ -55,7 +61,7 @@ main {
 }
 
 .player {
-  width: 200px;
+  // width: 200px;
   // height: 200px;
   margin-left: 30px;
   padding: 10px;
