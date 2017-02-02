@@ -6,6 +6,7 @@ import CMath from './CMath';
 import CommandPanel from './command-panel.jsx';
 import CommnadLi from './command-list';
 import CommnadIndex from './command-index.jsx';
+import CommnadHistory from './command-history.jsx';
 
 export default class Stage extends React.Component {
   constructor(props) {
@@ -238,6 +239,7 @@ export default class Stage extends React.Component {
         </div>
         <CommnadIndex characterLi={CharacterLi} />
         <CommandPanel ability={this.state.ability} special={this.state.special} onCommand={(command) => this.handleCommand(command)} />
+        <CommnadHistory attackArr={this.state.attackArr} />
       </div>
     );
   }

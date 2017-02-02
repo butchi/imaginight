@@ -233,3 +233,10 @@ main .stage {
     left: 0;
     top: 91px;
     top: 1.3rem; }
+
+.command-history {
+  position: absolute;
+  left: 280px;
+  left: 4rem;
+  top: 490px;
+  top: 7rem; }
