@@ -7,7 +7,7 @@ const specialFunc = CommandLi.specialFunc;
 
 const CharacterLi = [
   {
-    name: "Knight",
+    name: "ナイト",
     hp: [4,0],
     job: "Knight",
     special: {
@@ -19,7 +19,7 @@ const CharacterLi = [
     },
   },
   {
-    name: "Dark Knight",
+    name: "ダークナイト",
     hp: [-4,0],
     job: "Dark Knight",
     special: {
@@ -31,7 +31,7 @@ const CharacterLi = [
     },
   },
   {
-    name: "Magician",
+    name: "魔道士",
     hp: [0,3],
     job: "Magician",
     special: {
@@ -43,7 +43,7 @@ const CharacterLi = [
     },
   },
   {
-    name: "Healer",
+    name: "ヒーラー",
     hp: [3,0],
     job: "Healer",
     special: {
@@ -55,7 +55,7 @@ const CharacterLi = [
     },
   },
   {
-    name: "Priest",
+    name: "神父",
     hp: [3,0],
     job: "Priest",
     special: {

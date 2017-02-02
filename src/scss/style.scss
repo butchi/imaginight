@@ -1,6 +1,8 @@
 $base-font-size: 14px;
 $cursive: 'Averia Serif Libre', cursive;
 
+$gray: #999;
+
 @function px($size) {
   @return #{$size / 100}rem;
 }
@@ -93,16 +95,25 @@ main {
     background-color: #ccc;
   }
 
-  h2 {
-    font-size: px(24);
+  .name {
+    margin: 0;
+
+    font-size: px(20);
+  }
+
+  .job {
+    font-size: px(12);
+    font-weight: bold;
+    color: $gray;
   }
 
   .hp {
-    font-size: px(24);
+    margin-top: px(5);
+    font-size: px(14);
   }
 
-  .power {
-    font-size: px(16);
+  .special {
+    font-size: px(14);
   }
 
   .map-hp {
