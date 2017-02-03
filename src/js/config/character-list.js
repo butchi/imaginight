@@ -100,7 +100,9 @@ const CharacterLi = [
         condition: (opts) => {
           return !opts.target.alive;
         },
-        calc: () => { return [4,0]; },
+        calc: () => {
+          return [4,0];
+        },
       }),
       desc: '戦闘不能のHPを(4,0)にする',
     }
