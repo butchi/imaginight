@@ -63,8 +63,8 @@ main .stage {
 
 .player {
   position: relative;
-  width: 142.8px;
-  width: 2.04rem;
+  width: 144.2px;
+  width: 2.06rem;
   height: 212.8px;
   height: 3.04rem;
   float: left;
@@ -86,8 +86,8 @@ main .stage {
     left: -0.04rem;
     top: -2.8px;
     top: -0.04rem;
-    width: 142.8px;
-    width: 2.04rem;
+    width: 144.2px;
+    width: 2.06rem;
     height: 212.8px;
     height: 3.04rem;
     border: 1.4px solid;
@@ -96,17 +96,12 @@ main .stage {
     border-color: #f99; }
   .player[data-party="1"]:after {
     border-color: #99f; }
-  .player[data-active="1"] {
-    padding: 4.2px;
-    padding: 0.06rem;
-    border-width: 2.8px;
-    border-width: 0.04rem; }
-    .player[data-active="1"][data-party="0"] {
-      -webkit-animation: blink-red 1s linear 0s infinite alternate;
-              animation: blink-red 1s linear 0s infinite alternate; }
-    .player[data-active="1"][data-party="1"] {
-      -webkit-animation: blink-blue 1s linear 0s infinite alternate;
-              animation: blink-blue 1s linear 0s infinite alternate; }
+  .player[data-active="1"][data-party="0"] {
+    -webkit-animation: blink-red 1s linear 0s infinite alternate;
+            animation: blink-red 1s linear 0s infinite alternate; }
+  .player[data-active="1"][data-party="1"] {
+    -webkit-animation: blink-blue 1s linear 0s infinite alternate;
+            animation: blink-blue 1s linear 0s infinite alternate; }
   .player[data-attacking="1"] {
     transition: -webkit-transform 0.2s ease-out 0s;
     transition: transform 0.2s ease-out 0s;
@@ -292,5 +287,5 @@ main .stage {
   position: absolute;
   left: 280px;
   left: 4rem;
-  top: 490px;
-  top: 7rem; }
+  top: 518px;
+  top: 7.4rem; }
