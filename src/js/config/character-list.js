@@ -57,7 +57,7 @@ const CharacterLi = [
   {
     name: "暗黒魔道士",
     hp: [-3,0],
-    job: "Dark Mage",
+    job: "Black Mage",
     special: {
       name: "属性逆変化",
       func: normalFunc({
