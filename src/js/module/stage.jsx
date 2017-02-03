@@ -65,7 +65,7 @@ export default class Stage extends React.Component {
 
   next() {
     let playerArr = this.state.playerArr;
-    let currentPlayerIndex = this.state.currentPlayerIndex
+    let currentPlayerIndex = this.state.currentPlayerIndex;
     let currentPlayer = this.state.playerArr[currentPlayerIndex];
 
     if(currentPlayer) {
@@ -87,8 +87,32 @@ export default class Stage extends React.Component {
       special: currentPlayer.special,
       command: (this.state.command && this.state.command.type === 'default') ? this.state.command : currentPlayer.special,
     });
+  }
 
-    return;
+  back() {
+    let playerArr = this.state.playerArr;
+    let currentPlayerIndex = this.state.currentPlayerIndex;
+    let currentPlayer = this.state.playerArr[currentPlayerIndex];
+
+    if(currentPlayer) {
+      currentPlayer.active = false;
+    }
+
+    do {
+      currentPlayerIndex = (currentPlayerIndex + this.props.charaLen - 1) % this.props.charaLen;
+      currentPlayer = this.state.playerArr[currentPlayerIndex];
+    } while (!currentPlayer.alive);
+
+    currentPlayer.active = true;
+
+    currentPlayer.special.desc = currentPlayer.special.desc || currentPlayer.special.func.desc;
+
+    this.setState({
+      playerArr,
+      currentPlayerIndex,
+      special: currentPlayer.special,
+      command: (this.state.command && this.state.command.type === 'default') ? this.state.command : currentPlayer.special,
+    });
   }
 
   reset() {
@@ -231,6 +255,17 @@ export default class Stage extends React.Component {
     this.state.command = command;
   }
 
+  handleBack() {
+    let attackArr = this.state.attackArr;
+    attackArr.pop();
+
+    this.setState({
+      attackArr,
+    });
+
+    this.back();
+  }
+
   render() {
     return (
       <div>
@@ -239,7 +274,7 @@ export default class Stage extends React.Component {
         </div>
         <CommnadIndex characterLi={CharacterLi} />
         <CommandPanel ability={this.state.ability} special={this.state.special} onCommand={(command) => this.handleCommand(command)} />
-        <CommnadHistory attackArr={this.state.attackArr} />
+        <CommnadHistory attackArr={this.state.attackArr} onBack={() => this.handleBack()} />
       </div>
     );
   }

@@ -43,6 +43,18 @@ const CharacterLi = [
     },
   },
   {
+    name: "トレーナー",
+    hp: [2,0],
+    job: "Trainer",
+    special: {
+      name: "強化",
+      func: normalFunc({
+        operator: '*',
+        power: [2,0],
+      }),
+    },
+  },
+  {
     name: "魔道士",
     hp: [3,0],
     job: "Magician",

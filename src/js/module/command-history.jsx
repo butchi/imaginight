@@ -19,7 +19,10 @@ export default class CommandHistory extends React.Component {
     });
 
     return (
-      <div className="command-history">{commandElmArr}</div>
+      <div className="command-history">
+        <div className="back" onClick={() => this.props.onBack()} style={{display: attackArr.length ? 'block' : 'none'}}>←</div>
+        <div className="history">{commandElmArr}</div>
+      </div>
     );
   }
 }
