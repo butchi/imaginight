@@ -1,6 +1,6 @@
 import React from 'react';
 import PlayerList from './player-list.jsx';
-import CharacterLi from '../config/character-list';
+import { CharacterLi, NameArr } from '../config/character-list';
 import Complex from './Complex';
 import CMath from './CMath';
 import CommandPanel from './command-panel.jsx';
@@ -13,9 +13,13 @@ export default class Stage extends React.Component {
     super(props);
 
     let playerArr = [];
+    let shuffleNameArr = _.shuffle(NameArr);
 
     for(let i = 0; i < this.props.charaLen; i++) {
       let player = _.clone(_.sample(CharacterLi));
+
+      player.name = shuffleNameArr[i] || player.name;
+
       player.alive = true;
 
       player.index = i;
