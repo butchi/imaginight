@@ -13,7 +13,7 @@ export default class CommandHistory extends React.Component {
     attackArr.forEach((attack, index) => {
       commandElmArr.push(
         <div className="attack" key={index}>
-          <div className="command">{attack.command.name}: {attack.command.desc || attack.command.func.desc}</div>
+          <div className="command">{attack.command.name}: {attack.command.desc || attack.command.func.desc} <i className="fa fa-long-arrow-right" aria-hidden="true"></i> {attack.target.name}</div>
         </div>
       );
     });
