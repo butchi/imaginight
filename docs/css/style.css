@@ -14,7 +14,7 @@ body {
   font-size: 33.6px;
   font-size: 0.48rem; }
 
-main .stage {
+body[data-page-id="battle"] main .stage {
   position: absolute;
   left: 0;
   top: 35px;
@@ -23,13 +23,13 @@ main .stage {
   width: 10rem;
   margin-top: 14px;
   margin-top: 0.2rem; }
-  main .stage[data-phase="select"] .player:hover {
+  body[data-page-id="battle"] main .stage[data-phase="select"] .player:hover {
     background-color: #fcc;
     cursor: pointer; }
-  main .stage .player[data-attacking="1"] {
+  body[data-page-id="battle"] main .stage .player[data-attacking="1"] {
     -webkit-transform: translateY(-0.2rem);
             transform: translateY(-0.2rem); }
-  main .stage:after {
+  body[data-page-id="battle"] main .stage:after {
     content: ".";
     display: block;
     height: 0;
@@ -61,7 +61,7 @@ main .stage {
   100% {
     border-color: rgba(0, 0, 255, 0); } }
 
-.player {
+body[data-page-id="battle"] .player {
   position: relative;
   width: 144.2px;
   width: 2.06rem;
@@ -79,7 +79,7 @@ main .stage {
   transition: transform 0.2s ease-in 0s, -webkit-transform 0.2s ease-in 0s;
   border: 2.8px solid transparent;
   border: 0.04rem solid transparent; }
-  .player:after {
+  body[data-page-id="battle"] .player:after {
     content: "";
     position: absolute;
     left: -2.8px;
@@ -92,46 +92,46 @@ main .stage {
     height: 3.04rem;
     border: 1.4px solid;
     border: 0.02rem solid; }
-  .player[data-party="0"]:after {
+  body[data-page-id="battle"] .player[data-party="0"]:after {
     border-color: #99f; }
-  .player[data-party="1"]:after {
+  body[data-page-id="battle"] .player[data-party="1"]:after {
     border-color: #f99; }
-  .player[data-active="1"][data-party="0"] {
+  body[data-page-id="battle"] .player[data-active="1"][data-party="0"] {
     -webkit-animation: blink-blue 1s linear 0s infinite alternate;
             animation: blink-blue 1s linear 0s infinite alternate; }
-  .player[data-active="1"][data-party="1"] {
+  body[data-page-id="battle"] .player[data-active="1"][data-party="1"] {
     -webkit-animation: blink-red 1s linear 0s infinite alternate;
             animation: blink-red 1s linear 0s infinite alternate; }
-  .player[data-attacking="1"] {
+  body[data-page-id="battle"] .player[data-attacking="1"] {
     transition: -webkit-transform 0.2s ease-out 0s;
     transition: transform 0.2s ease-out 0s;
     transition: transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s; }
-  .player[data-attacked="1"] {
+  body[data-page-id="battle"] .player[data-attacked="1"] {
     -webkit-transform: scale(1.1);
             transform: scale(1.1);
     transition: -webkit-transform 0.2s ease-out 0s;
     transition: transform 0.2s ease-out 0s;
     transition: transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s; }
-  .player[data-alive="0"] {
+  body[data-page-id="battle"] .player[data-alive="0"] {
     background-color: #ccc; }
-  .player .name {
+  body[data-page-id="battle"] .player .name {
     margin: 0;
     font-size: 14px;
     font-size: 0.2rem; }
-  .player .job {
+  body[data-page-id="battle"] .player .job {
     font-size: 8.4px;
     font-size: 0.12rem;
     font-weight: bold;
     color: #999; }
-  .player .hp {
+  body[data-page-id="battle"] .player .hp {
     margin-top: 3.5px;
     margin-top: 0.05rem;
     font-size: 9.8px;
     font-size: 0.14rem; }
-  .player .special {
+  body[data-page-id="battle"] .player .special {
     font-size: 9.8px;
     font-size: 0.14rem; }
-  .player .map-hp {
+  body[data-page-id="battle"] .player .map-hp {
     position: relative;
     width: 126.7px;
     width: 1.81rem;
@@ -141,7 +141,7 @@ main .stage {
     background-size: cover;
     background-repeat: no-repeat;
     font-size: 0; }
-    .player .map-hp.center, .player .map-hp:before {
+    body[data-page-id="battle"] .player .map-hp.center, body[data-page-id="battle"] .player .map-hp:before, body[data-page-id="battle"] body[data-page-id="golf"] .player .map-hp:before, body[data-page-id="golf"] body[data-page-id="battle"] .player .map-hp:before {
       position: absolute;
       left: 56px;
       left: 0.8rem;
@@ -153,9 +153,9 @@ main .stage {
       height: 0.19rem;
       background-color: #f99;
       border: 1px solid #ccc; }
-    .player .map-hp:before {
+    body[data-page-id="battle"] .player .map-hp:before {
       content: ""; }
-    .player .map-hp .cur {
+    body[data-page-id="battle"] .player .map-hp .cur {
       position: absolute;
       width: 14.7px;
       width: 0.21rem;
@@ -165,76 +165,76 @@ main .stage {
       background-color: #000;
       -webkit-transform: scale(0.5);
               transform: scale(0.5); }
-    .player .map-hp[data-hp-real="-4"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="-4"] .cur {
       left: 0px;
       left: 0rem; }
-    .player .map-hp[data-hp-real="-3"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="-3"] .cur {
       left: 14px;
       left: 0.2rem; }
-    .player .map-hp[data-hp-real="-2"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="-2"] .cur {
       left: 28px;
       left: 0.4rem; }
-    .player .map-hp[data-hp-real="-1"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="-1"] .cur {
       left: 42px;
       left: 0.6rem; }
-    .player .map-hp[data-hp-real="0"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="0"] .cur {
       left: 56px;
       left: 0.8rem; }
-    .player .map-hp[data-hp-real="1"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="1"] .cur {
       left: 70px;
       left: 1rem; }
-    .player .map-hp[data-hp-real="2"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="2"] .cur {
       left: 84px;
       left: 1.2rem; }
-    .player .map-hp[data-hp-real="3"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="3"] .cur {
       left: 98px;
       left: 1.4rem; }
-    .player .map-hp[data-hp-real="4"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-real="4"] .cur {
       left: 112px;
       left: 1.6rem; }
-    .player .map-hp[data-hp-imag="-4"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="-4"] .cur {
       top: 112px;
       top: 1.6rem; }
-    .player .map-hp[data-hp-imag="-3"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="-3"] .cur {
       top: 98px;
       top: 1.4rem; }
-    .player .map-hp[data-hp-imag="-2"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="-2"] .cur {
       top: 84px;
       top: 1.2rem; }
-    .player .map-hp[data-hp-imag="-1"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="-1"] .cur {
       top: 70px;
       top: 1rem; }
-    .player .map-hp[data-hp-imag="0"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="0"] .cur {
       top: 56px;
       top: 0.8rem; }
-    .player .map-hp[data-hp-imag="1"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="1"] .cur {
       top: 42px;
       top: 0.6rem; }
-    .player .map-hp[data-hp-imag="2"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="2"] .cur {
       top: 28px;
       top: 0.4rem; }
-    .player .map-hp[data-hp-imag="3"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="3"] .cur {
       top: 14px;
       top: 0.2rem; }
-    .player .map-hp[data-hp-imag="4"] .cur {
+    body[data-page-id="battle"] .player .map-hp[data-hp-imag="4"] .cur {
       top: 0px;
       top: 0rem; }
 
-.command-index {
+body[data-page-id="battle"] .command-index {
   position: absolute;
   left: 644px;
   left: 9.2rem;
   top: 35px;
   top: 0.5rem; }
-  .command-index .command + .command {
+  body[data-page-id="battle"] .command-index .command + .command {
     margin-top: 7px;
     margin-top: 0.1rem; }
-  .command-index .job {
+  body[data-page-id="battle"] .command-index .job {
     font-weight: bold;
     font-size: 11.2px;
     font-size: 0.16rem; }
 
-.command-panel {
+body[data-page-id="battle"] .command-panel {
   position: absolute;
   left: 28px;
   left: 0.4rem;
@@ -242,48 +242,289 @@ main .stage {
   top: 7.2rem;
   width: 210px;
   width: 3rem; }
-  .command-panel .left {
+  body[data-page-id="battle"] .command-panel .left {
     position: absolute;
     left: 0px;
     left: 0rem;
     top: 21px;
     top: 0.3rem; }
-  .command-panel .right {
+  body[data-page-id="battle"] .command-panel .right {
     position: absolute;
     left: 84px;
     left: 1.2rem;
     top: 21px;
     top: 0.3rem; }
-  .command-panel .down {
+  body[data-page-id="battle"] .command-panel .down {
     position: absolute;
     left: 42px;
     left: 0.6rem;
     top: 42px;
     top: 0.6rem; }
-  .command-panel .up {
+  body[data-page-id="battle"] .command-panel .up {
     position: absolute;
     left: 42px;
     left: 0.6rem;
     top: 0px;
     top: 0rem; }
-  .command-panel .restore {
+  body[data-page-id="battle"] .command-panel .restore {
     position: absolute;
     left: 42px;
     left: 0.6rem;
     top: 21px;
     top: 0.3rem; }
-  .command-panel .special {
+  body[data-page-id="battle"] .command-panel .special {
     position: absolute;
     left: 0;
     top: 70px;
     top: 1rem; }
-  .command-panel .desc {
+  body[data-page-id="battle"] .command-panel .desc {
     position: absolute;
     left: 0;
     top: 91px;
     top: 1.3rem; }
 
-.command-history {
+body[data-page-id="battle"] .command-history {
+  position: absolute;
+  left: 280px;
+  left: 4rem;
+  top: 518px;
+  top: 7.4rem; }
+
+body[data-page-id="golf"] main .stage {
+  position: absolute;
+  left: 0;
+  top: 35px;
+  top: 0.5rem;
+  width: 700px;
+  width: 10rem;
+  margin-top: 14px;
+  margin-top: 0.2rem; }
+  body[data-page-id="golf"] main .stage[data-phase="select"] .player:hover {
+    background-color: #fcc;
+    cursor: pointer; }
+  body[data-page-id="golf"] main .stage .player[data-attacking="1"] {
+    -webkit-transform: translateY(-0.2rem);
+            transform: translateY(-0.2rem); }
+
+body[data-page-id="golf"] .player {
+  position: relative;
+  width: 144.2px;
+  width: 2.06rem;
+  height: 212.8px;
+  height: 3.04rem;
+  float: left;
+  margin: 7px 7px;
+  margin: 0.1rem 0.1rem;
+  padding: 7px;
+  padding: 0.1rem;
+  box-shadow: 0.01rem 0.01rem 0.03rem #ccc;
+  background-color: #fff;
+  transition: -webkit-transform 0.2s ease-in 0s;
+  transition: transform 0.2s ease-in 0s;
+  transition: transform 0.2s ease-in 0s, -webkit-transform 0.2s ease-in 0s;
+  border: 2.8px solid transparent;
+  border: 0.04rem solid transparent; }
+  body[data-page-id="golf"] .player:after {
+    content: "";
+    position: absolute;
+    left: -2.8px;
+    left: -0.04rem;
+    top: -2.8px;
+    top: -0.04rem;
+    width: 144.2px;
+    width: 2.06rem;
+    height: 212.8px;
+    height: 3.04rem;
+    border: 1.4px solid;
+    border: 0.02rem solid; }
+  body[data-page-id="golf"] .player[data-active="1"][data-party="0"] {
+    -webkit-animation: blink-blue 1s linear 0s infinite alternate;
+            animation: blink-blue 1s linear 0s infinite alternate; }
+  body[data-page-id="golf"] .player[data-active="1"][data-party="1"] {
+    -webkit-animation: blink-red 1s linear 0s infinite alternate;
+            animation: blink-red 1s linear 0s infinite alternate; }
+  body[data-page-id="golf"] .player[data-attacking="1"] {
+    transition: -webkit-transform 0.2s ease-out 0s;
+    transition: transform 0.2s ease-out 0s;
+    transition: transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s; }
+  body[data-page-id="golf"] .player[data-attacked="1"] {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+    transition: -webkit-transform 0.2s ease-out 0s;
+    transition: transform 0.2s ease-out 0s;
+    transition: transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s; }
+  body[data-page-id="golf"] .player[data-alive="0"] {
+    background-color: #ccc; }
+  body[data-page-id="golf"] .player .name {
+    margin: 0;
+    font-size: 14px;
+    font-size: 0.2rem; }
+  body[data-page-id="golf"] .player .job {
+    font-size: 8.4px;
+    font-size: 0.12rem;
+    font-weight: bold;
+    color: #999; }
+  body[data-page-id="golf"] .player .hp {
+    margin-top: 3.5px;
+    margin-top: 0.05rem;
+    font-size: 9.8px;
+    font-size: 0.14rem; }
+  body[data-page-id="golf"] .player .special {
+    font-size: 9.8px;
+    font-size: 0.14rem; }
+  body[data-page-id="golf"] .player .map-hp {
+    position: relative;
+    width: 126.7px;
+    width: 1.81rem;
+    height: 126.7px;
+    height: 1.81rem;
+    background-image: url("../img/grid.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 0; }
+    body[data-page-id="golf"] .player .map-hp.center, body[data-page-id="golf"] body[data-page-id="battle"] .player .map-hp:before, body[data-page-id="battle"] body[data-page-id="golf"] .player .map-hp:before, body[data-page-id="golf"] .player .map-hp:before {
+      position: absolute;
+      left: 56px;
+      left: 0.8rem;
+      top: 56px;
+      top: 0.8rem;
+      width: 13.3px;
+      width: 0.19rem;
+      height: 13.3px;
+      height: 0.19rem;
+      background-color: #f99;
+      border: 1px solid #ccc; }
+    body[data-page-id="golf"] .player .map-hp:before {
+      content: ""; }
+    body[data-page-id="golf"] .player .map-hp .cur {
+      position: absolute;
+      width: 14.7px;
+      width: 0.21rem;
+      height: 14.7px;
+      height: 0.21rem;
+      border-radius: 0.21rem;
+      background-color: #000;
+      -webkit-transform: scale(0.5);
+              transform: scale(0.5); }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="-4"] .cur {
+      left: 0px;
+      left: 0rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="-3"] .cur {
+      left: 14px;
+      left: 0.2rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="-2"] .cur {
+      left: 28px;
+      left: 0.4rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="-1"] .cur {
+      left: 42px;
+      left: 0.6rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="0"] .cur {
+      left: 56px;
+      left: 0.8rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="1"] .cur {
+      left: 70px;
+      left: 1rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="2"] .cur {
+      left: 84px;
+      left: 1.2rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="3"] .cur {
+      left: 98px;
+      left: 1.4rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-real="4"] .cur {
+      left: 112px;
+      left: 1.6rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="-4"] .cur {
+      top: 112px;
+      top: 1.6rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="-3"] .cur {
+      top: 98px;
+      top: 1.4rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="-2"] .cur {
+      top: 84px;
+      top: 1.2rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="-1"] .cur {
+      top: 70px;
+      top: 1rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="0"] .cur {
+      top: 56px;
+      top: 0.8rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="1"] .cur {
+      top: 42px;
+      top: 0.6rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="2"] .cur {
+      top: 28px;
+      top: 0.4rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="3"] .cur {
+      top: 14px;
+      top: 0.2rem; }
+    body[data-page-id="golf"] .player .map-hp[data-hp-imag="4"] .cur {
+      top: 0px;
+      top: 0rem; }
+
+body[data-page-id="golf"] .command-index {
+  position: absolute;
+  left: 644px;
+  left: 9.2rem;
+  top: 35px;
+  top: 0.5rem; }
+  body[data-page-id="golf"] .command-index .command + .command {
+    margin-top: 7px;
+    margin-top: 0.1rem; }
+  body[data-page-id="golf"] .command-index .job {
+    font-weight: bold;
+    font-size: 11.2px;
+    font-size: 0.16rem; }
+
+body[data-page-id="golf"] .command-panel {
+  position: absolute;
+  left: 28px;
+  left: 0.4rem;
+  top: 504px;
+  top: 7.2rem;
+  width: 210px;
+  width: 3rem; }
+  body[data-page-id="golf"] .command-panel .left {
+    position: absolute;
+    left: 0px;
+    left: 0rem;
+    top: 21px;
+    top: 0.3rem; }
+  body[data-page-id="golf"] .command-panel .right {
+    position: absolute;
+    left: 84px;
+    left: 1.2rem;
+    top: 21px;
+    top: 0.3rem; }
+  body[data-page-id="golf"] .command-panel .down {
+    position: absolute;
+    left: 42px;
+    left: 0.6rem;
+    top: 42px;
+    top: 0.6rem; }
+  body[data-page-id="golf"] .command-panel .up {
+    position: absolute;
+    left: 42px;
+    left: 0.6rem;
+    top: 0px;
+    top: 0rem; }
+  body[data-page-id="golf"] .command-panel .restore {
+    position: absolute;
+    left: 42px;
+    left: 0.6rem;
+    top: 21px;
+    top: 0.3rem; }
+  body[data-page-id="golf"] .command-panel .special {
+    position: absolute;
+    left: 0;
+    top: 70px;
+    top: 1rem; }
+  body[data-page-id="golf"] .command-panel .desc {
+    position: absolute;
+    left: 0;
+    top: 91px;
+    top: 1.3rem; }
+
+body[data-page-id="golf"] .command-history {
   position: absolute;
   left: 280px;
   left: 4rem;

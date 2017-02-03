@@ -1,0 +1,242 @@
+body[data-page-id="golf"] {
+  main {
+    .stage {
+      position: absolute;
+
+      left: 0;
+      top: px(50);
+
+      // MAGIC NUMBER: 4つに区切る
+      width: px(1000);
+
+      &[data-phase="select"] {
+        .player:hover {
+          background-color: #fcc;
+          cursor: pointer;
+        }
+      }
+
+      margin-top: px(20);
+
+      .player[data-attacking="1"] {
+        transform: translateY(px(-20));
+      }
+    }
+  }
+
+  .player {
+    position: relative;
+
+    width: px(206);
+    height: px(304);
+    float: left;
+
+    margin: px(10) px(10);
+
+    padding: px(10);
+
+    box-shadow: px(1) px(1) px(3) #ccc;
+
+    background-color: #fff;
+
+    transition: transform 0.2s ease-in 0s;
+
+    border: px(4) solid transparent;
+
+    &::after {
+      content: "";
+
+      position: absolute;
+
+      left: px(-4);
+      top: px(-4);
+
+      width: px(206);
+      height: px(304);
+
+      border: px(2) solid;
+    }
+
+    &[data-active="1"] {
+      &[data-party="0"] {
+        animation: blink-blue 1s linear 0s infinite alternate;
+      }
+      &[data-party="1"] {
+        animation: blink-red 1s linear 0s infinite alternate;
+      }
+    }
+
+    &[data-attacking="1"] {
+      transition: transform 0.2s ease-out 0s;
+    }
+
+    &[data-attacked="1"] {
+      transform: scale(1.1);
+      transition: transform 0.2s ease-out 0s;
+    }
+
+    &[data-alive="0"] {
+      background-color: #ccc;
+    }
+
+    .name {
+      margin: 0;
+
+      font-size: px(20);
+    }
+
+    .job {
+      font-size: px(12);
+      font-weight: bold;
+      color: $gray;
+    }
+
+    .hp {
+      margin-top: px(5);
+      font-size: px(14);
+    }
+
+    .special {
+      font-size: px(14);
+    }
+
+    .map-hp {
+      position: relative;
+
+      width: px(181);
+      height: px(181);
+
+      background-image: url("../img/grid.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      font-size: 0;
+
+      &.center {
+        position: absolute;
+
+        left: px(80);
+        top: px(80);
+
+        width: px(19);
+        height: px(19);
+
+        background-color: #f99;
+
+        border: 1px solid #ccc;
+      }
+
+      &::before {
+        content: "";
+
+        @extend .center;
+      }
+
+      .cur {
+        position: absolute;
+
+        width: px(21);
+        height: px(21);
+        border-radius: px(21);
+
+        background-color: #000;
+
+        transform: scale(0.5);
+      }
+
+      @for $x from -4 through 4 {
+        &[data-hp-real="#{$x}"] {
+          .cur {
+            left: px(($x + 4) * 20);
+          }
+        }
+      }
+
+      @for $y from -4 through 4 {
+        &[data-hp-imag="#{$y}"] {
+          .cur {
+            top: px((- $y + 4) * 20);
+          }
+        }
+      }
+    }
+  }
+
+  .command-index {
+    position: absolute;
+
+    left: px(920);
+    top: px(50);
+
+    .command {
+      + .command {
+        margin-top: px(10);
+      }
+    }
+
+    .job {
+      font-weight: bold;
+      font-size: px(16);
+    }
+  }
+
+  .command-panel {
+    position: absolute;
+
+    left: px(40);
+    top: px(720);
+
+    width: px(300);
+
+    .left {
+      position: absolute;
+      left: px(0);
+      top: px(30);
+    }
+
+    .right {
+      position: absolute;
+      left: px(120);
+      top: px(30);
+    }
+
+    .down {
+      position: absolute;
+      left: px(60);
+      top: px(60);
+    }
+
+    .up {
+      position: absolute;
+      left: px(60);
+      top: px(0);
+    }
+
+    .restore {
+      position: absolute;
+      left: px(60);
+      top: px(30);
+    }
+
+    .special {
+      position: absolute;
+
+      left: 0;
+      top: px(100);
+    }
+
+    .desc {
+      position: absolute;
+
+      left: 0;
+      top: px(130);
+    }
+  }
+
+  .command-history {
+    position: absolute;
+
+    left: px(400);
+    top: px(740);
+  }
+}
