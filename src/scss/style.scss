@@ -74,21 +74,78 @@ main {
   }
 }
 
+@keyframes blink-red {
+  0% {
+    border-color: rgba(255, 0, 0, 1);
+  }
+  100% {
+    border-color: rgba(255, 0, 0, 0);
+  }
+}
+
+@keyframes blink-blue {
+  0% {
+    border-color: rgba(0, 0, 255, 1);
+  }
+  100% {
+    border-color: rgba(0, 0, 255, 0);
+  }
+}
+
 .player {
+  position: relative;
+
   width: px(204);
-  // height: 200px;
-  margin-left: px(30);
-  padding: px(10);
+  height: px(304);
   float: left;
 
-  border: px(2) solid transparent;
+  margin: px(10) px(10);
+
+  padding: px(10);
+
+  box-shadow: px(1) px(1) px(3) #ccc;
 
   background-color: #fff;
 
   transition: transform 0.2s ease-in 0s;
 
+  border: px(4) solid transparent;
+
+  &::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: px(2) solid;
+  }
+
+  &[data-party="0"] {
+    &::after {
+      border-color: #f99;
+    }
+  }
+  &[data-party="1"] {
+    &::after {
+      border-color: #99f;
+    }
+  }
+
   &[data-active="1"] {
-    border-color: #f00;
+    padding: px(6);
+    border-width: px(4);
+
+    &[data-party="0"] {
+      animation: blink-red 1s linear 0s infinite alternate;
+    }
+    &[data-party="1"] {
+      animation: blink-blue 1s linear 0s infinite alternate;
+    }
   }
 
   &[data-attacking="1"] {
@@ -190,7 +247,7 @@ main {
 .command-index {
   position: absolute;
 
-  left: px(1000);
+  left: px(920);
   top: px(50);
 
   .command {
@@ -209,7 +266,7 @@ main {
   position: absolute;
 
   left: px(40);
-  top: px(700);
+  top: px(720);
 
   width: px(300);
 
