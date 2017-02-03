@@ -20,7 +20,7 @@ export default class CommandHistory extends React.Component {
 
     return (
       <div className="command-history">
-        <div className="back" onClick={() => this.props.onBack()} style={{display: attackArr.length ? 'block' : 'none'}}>←</div>
+        <div className="back" onClick={() => this.props.onBack()} style={{display: attackArr.length ? 'block' : 'none'}}><i className="fa fa-undo" aria-hidden="true" style={{cursor: 'pointer'}}></i></div>
         <div className="history">{commandElmArr}</div>
       </div>
     );
