@@ -127,21 +127,21 @@ main {
 
   &[data-party="0"] {
     &::after {
-      border-color: #f99;
+      border-color: #99f;
     }
   }
   &[data-party="1"] {
     &::after {
-      border-color: #99f;
+      border-color: #f99;
     }
   }
 
   &[data-active="1"] {
     &[data-party="0"] {
-      animation: blink-red 1s linear 0s infinite alternate;
+      animation: blink-blue 1s linear 0s infinite alternate;
     }
     &[data-party="1"] {
-      animation: blink-blue 1s linear 0s infinite alternate;
+      animation: blink-red 1s linear 0s infinite alternate;
     }
   }
 

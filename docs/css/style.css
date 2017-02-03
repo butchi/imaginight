@@ -93,15 +93,15 @@ main .stage {
     border: 1.4px solid;
     border: 0.02rem solid; }
   .player[data-party="0"]:after {
-    border-color: #f99; }
-  .player[data-party="1"]:after {
     border-color: #99f; }
+  .player[data-party="1"]:after {
+    border-color: #f99; }
   .player[data-active="1"][data-party="0"] {
-    -webkit-animation: blink-red 1s linear 0s infinite alternate;
-            animation: blink-red 1s linear 0s infinite alternate; }
-  .player[data-active="1"][data-party="1"] {
     -webkit-animation: blink-blue 1s linear 0s infinite alternate;
             animation: blink-blue 1s linear 0s infinite alternate; }
+  .player[data-active="1"][data-party="1"] {
+    -webkit-animation: blink-red 1s linear 0s infinite alternate;
+            animation: blink-red 1s linear 0s infinite alternate; }
   .player[data-attacking="1"] {
     transition: -webkit-transform 0.2s ease-out 0s;
     transition: transform 0.2s ease-out 0s;
