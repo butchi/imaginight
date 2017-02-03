@@ -2,7 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 
-import Stage from './module/stage.jsx';
+import BattleStage from './module/battle/stage.jsx';
+import GolfStage from './module/golf/stage.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Battle extends React.Component {
   render() {
     return (
       <div className="battle">
-        <Stage charaLen={8} />
+        <BattleStage charaLen={8} />
       </div>
     );
   }
@@ -49,7 +50,9 @@ class Golf extends React.Component {
 
   render() {
     return (
-      <div className="battle" />
+      <div className="golf">
+        <GolfStage charaLen={8} />
+      </div>
     );
   }
 }

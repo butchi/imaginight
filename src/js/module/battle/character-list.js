@@ -1,6 +1,6 @@
-import Complex from '../module/Complex';
-import CMath from '../module/CMath';
-import CommandLi from '../module/command-list';
+import Complex from '../Complex';
+import CMath from '../CMath';
+import CommandLi from './command-list';
 
 const normalFunc = CommandLi.normalFunc;
 const specialFunc = CommandLi.specialFunc;

@@ -1,8 +1,8 @@
 import React from 'react';
 import PlayerList from './player-list.jsx';
-import { CharacterLi, NameArr } from '../config/character-list';
-import Complex from './Complex';
-import CMath from './CMath';
+import { CharacterLi, NameArr } from './character-list';
+import Complex from '../Complex';
+import CMath from '../CMath';
 import CommandPanel from './command-panel.jsx';
 import CommnadLi from './command-list';
 import CommnadIndex from './command-index.jsx';

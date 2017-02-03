@@ -1,5 +1,5 @@
 import React from 'react';
-import Complex from './Complex';
+import Complex from '../Complex';
 
 export default class Player extends React.Component {
   constructor(props) {

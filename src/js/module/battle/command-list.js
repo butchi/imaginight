@@ -1,5 +1,5 @@
-import CMath from './CMath';
-import Complex from './Complex';
+import CMath from '../CMath';
+import Complex from '../Complex';
 
 function normalFunc(opts = {}) {
   let operator = opts.operator || '+';
