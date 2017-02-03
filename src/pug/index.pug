@@ -3,7 +3,7 @@ html(lang='ja')
   head
     meta(charset='UTF-8')
     title Imaginight
-    link(rel='stylesheet', href='css/style.css')
+    link(rel='stylesheet', href=`css/style.css?${versions["style.css"]}`)
     link(href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre", rel="stylesheet")
 
   body
@@ -17,6 +17,5 @@ html(lang='ja')
     script(src="js/lib/jquery.min.js")
     script(src="js/lib/lodash.min.js")
     script(src="https://use.fontawesome.com/afa49e4fb3.js")
-    //- script(src='js/script.js')
 
-    script(src="js/bundle.js")
+    script(src=`js/bundle.js?${versions["bundle.js"]}`)

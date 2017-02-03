@@ -25,7 +25,7 @@ const DEST = `${HTDOCS}${BASE_PATH}`;
 
 const revLogger = new RevLogger({
     'style.css': `${DEST}/css/style.css`,
-    'script.js': `${DEST}/js/script.js`
+    'bundle.js': `${DEST}/js/bundle.js`,
 });
 
 
