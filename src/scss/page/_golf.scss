@@ -9,22 +9,11 @@ body[data-page-id="golf"] {
       // MAGIC NUMBER: 4つに区切る
       width: px(1000);
 
-      &[data-phase="select"] {
-        .player:hover {
-          background-color: #fcc;
-          cursor: pointer;
-        }
-      }
-
       margin-top: px(20);
-
-      .player[data-attacking="1"] {
-        transform: translateY(px(-20));
-      }
     }
   }
 
-  .player {
+  .card {
     position: relative;
 
     width: px(206);
@@ -79,24 +68,8 @@ body[data-page-id="golf"] {
       background-color: #ccc;
     }
 
-    .name {
-      margin: 0;
-
-      font-size: px(20);
-    }
-
-    .job {
-      font-size: px(12);
-      font-weight: bold;
-      color: $gray;
-    }
-
     .hp {
       margin-top: px(5);
-      font-size: px(14);
-    }
-
-    .special {
       font-size: px(14);
     }
 
@@ -160,83 +133,5 @@ body[data-page-id="golf"] {
         }
       }
     }
-  }
-
-  .command-index {
-    position: absolute;
-
-    left: px(920);
-    top: px(50);
-
-    .command {
-      + .command {
-        margin-top: px(10);
-      }
-    }
-
-    .job {
-      font-weight: bold;
-      font-size: px(16);
-    }
-  }
-
-  .command-panel {
-    position: absolute;
-
-    left: px(40);
-    top: px(720);
-
-    width: px(300);
-
-    .left {
-      position: absolute;
-      left: px(0);
-      top: px(30);
-    }
-
-    .right {
-      position: absolute;
-      left: px(120);
-      top: px(30);
-    }
-
-    .down {
-      position: absolute;
-      left: px(60);
-      top: px(60);
-    }
-
-    .up {
-      position: absolute;
-      left: px(60);
-      top: px(0);
-    }
-
-    .restore {
-      position: absolute;
-      left: px(60);
-      top: px(30);
-    }
-
-    .special {
-      position: absolute;
-
-      left: 0;
-      top: px(100);
-    }
-
-    .desc {
-      position: absolute;
-
-      left: 0;
-      top: px(130);
-    }
-  }
-
-  .command-history {
-    position: absolute;
-
-    left: px(400);
-    top: px(740);
   }
 }

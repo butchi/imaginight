@@ -2,8 +2,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './module/golf/reducers';
+
 import BattleStage from './module/battle/stage.jsx';
-import GolfStage from './module/golf/stage.jsx';
+import GolfStage from './module/golf/components/Stage';
+
+const store = createStore(reducer);
 
 class App extends React.Component {
   constructor(props) {
@@ -50,9 +56,11 @@ class Golf extends React.Component {
 
   render() {
     return (
-      <div className="golf">
-        <GolfStage charaLen={8} />
-      </div>
+      <Provider store={store}>
+        <div className="golf">
+          <GolfStage />
+        </div>
+      </Provider>
     );
   }
 }
