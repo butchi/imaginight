@@ -12,7 +12,7 @@ export default class Stock extends React.Component {
 
     return (
       <div className="stock">
-        {console.log(cardArr), cardArr.map(card =>
+        {cardArr.map(card =>
           <Card
             key={card.id}
             {...card}
