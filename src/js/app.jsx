@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    location.replace('/battle/');
+    location.replace('/golf/');
   }
 
   render() {
