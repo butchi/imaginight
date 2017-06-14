@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { addCard } from './module';
+import { bindActionCreators } from 'redux';
+import { stageActionCreators } from './module';
 
 const mapStateToProps = (state) => {
   // const cardArr = state.get('cardArr');
@@ -10,9 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCard: (card) => {
-      dispatch(addCard(card))
-    },
+    ...bindActionCreators(stageActionCreators, dispatch),
   };
 };
 

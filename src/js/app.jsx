@@ -4,12 +4,12 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './module/golf/reducers';
+import { reducers } from './module/golf/reducers';
 
 import BattleStage from './module/battle/stage.jsx';
 import GolfStage from './module/golf/components/Stage';
 
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 class App extends React.Component {
   constructor(props) {

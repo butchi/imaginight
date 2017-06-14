@@ -5,7 +5,7 @@ import CMath from '../../CMath';
 
 import Field from './Field';
 import Stock from './Stock';
-import AddCard from '../containers/AddCard';
+// import AddCard from '../containers/AddCard';
 
 export default class Stage extends React.Component {
   constructor(props) {
@@ -31,7 +31,6 @@ export default class Stage extends React.Component {
               hp: [2,3],
             },
           ]} />
-        <AddCard />
       </div>
     );
   }

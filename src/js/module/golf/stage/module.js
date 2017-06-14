@@ -8,7 +8,11 @@ export const ActionTypes = {
 
 // Reducers
 export const cardState = Immutable.fromJS({
-  cardArr: '',
+  cardArr: [],
+});
+
+export const stageState = Immutable.fromJS({
+  cardState,
 });
 
 export default function reducer(state = cardState, action) {
@@ -40,17 +44,15 @@ export const attack = (hp) => ({
 });
 
 let nextCardId = 0;
-export const addCard = (card) => ({
-  type: 'ADD_CARD',
-  id: nextCardId++,
-  card,
-});
 
+const addCard = (card) => (dispatch) => {
+  dispatch({
+    type: 'ADD_CARD',
+    id: nextCardId++,
+    card,
+  });
+}
 
-import { combineReducers } from 'redux';
-
-const golfApp = combineReducers({
-  cardArr,
-});
-
-export default golfApp;
+export const stageActionCreators = {
+  addCard,
+};
