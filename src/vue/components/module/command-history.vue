@@ -31,8 +31,12 @@ export default {
 .command-history {
   position: absolute;
 
-  left: px(400);
-  top: px(680);
+  left: px(300);
+  top: px(520);
+
+  width: px(300);
+
+  font-size: px(10);
 
   .fa-undo {
     cursor: pointer;

@@ -51,53 +51,55 @@ export default {
 .command-panel {
   position: absolute;
 
-  left: px(40);
-  top: px(680);
+  left: px(20);
+  top: px(520);
 
-  width: px(300);
+  width: px(210);
+
+  font-size: px(10);
 
   .left {
     position: absolute;
     left: px(0);
-    top: px(30);
+    top: px(20);
   }
 
   .right {
     position: absolute;
-    left: px(120);
-    top: px(30);
+    left: px(100);
+    top: px(20);
   }
 
   .down {
     position: absolute;
-    left: px(60);
-    top: px(60);
+    left: px(50);
+    top: px(40);
   }
 
   .up {
     position: absolute;
-    left: px(60);
+    left: px(50);
     top: px(0);
   }
 
   .restore {
     position: absolute;
-    left: px(60);
-    top: px(30);
+    left: px(50);
+    top: px(20);
   }
 
   .special {
     position: absolute;
 
     left: 0;
-    top: px(100);
+    top: px(60);
   }
 
   .desc {
     position: absolute;
 
     left: 0;
-    top: px(130);
+    top: px(80);
   }
 }
 </style>
