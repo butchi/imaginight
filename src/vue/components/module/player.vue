@@ -21,6 +21,7 @@
     |  
     | 特殊技: {{ specialName }}
   .map-hp(
+    v-bind:style="{'background-image': `url(${grid})`}"
     v-bind:data-hp-real="hpReal"
     v-bind:data-hp-imag="hpImag"
   )
@@ -29,6 +30,7 @@
 
 <script>
 import Complex from "@/js/lib/complex"
+import gridImg from "@/img/grid.png";
 
 export default {
   name: 'player',
@@ -38,6 +40,7 @@ export default {
   },
   data() {
     return {
+      grid: gridImg,
     };
   },
   methods: {
@@ -203,7 +206,6 @@ export default {
     width: px(127);
     height: px(127);
 
-    background-image: image-url("grid.png");
     background-size: px(127);
     background-repeat: no-repeat;
 
