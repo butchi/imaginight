@@ -641,7 +641,7 @@ const characterLi = [
       name: "投獄",
       func: normalFunc({
         operator: '-',
-        power: [3,0],
+        power: [0,3],
       }),
     },
   },
