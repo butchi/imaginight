@@ -12,7 +12,7 @@ const HOST = process.env.HOST || '0.0.0.0'
 const PORT = process.env.PORT || 3000
 
 const constants = readConfig(`${SRC}/constants.yml`)
-const { BASE_DIR } = constants
+const { REPO_NAME, BASE_DIR } = constants
 
 const production = process.env.NODE_ENV === 'production'
 
@@ -56,7 +56,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, DEST + BASE_DIR),
         filename: '[name]',
-        publicPath: BASE_DIR,
+        publicPath: BASE_DIR + REPO_NAME + '/',
     },
     module: {
         // 各ファイル形式ごとのビルド設定
