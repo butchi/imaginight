@@ -14,8 +14,10 @@
     v-bind:handleCommand="handleCommand"
   )
   command-history(
-    v-bind:handleBack="handleBack"
+    v-bind:back="back"
     v-bind:attackArr="attackArr"
+    v-bind:isReady="isReady"
+    v-bind:attack="attack"
   )
 </template>
 
@@ -69,19 +71,27 @@ export default {
     },
 
     back() {
+      this.attackArr.pop();
+
       if(this.currentPlayer) {
         this.currentPlayer.active = false;
       }
 
-      do {
-        this.currentPlayerIndex = (this.currentPlayerIndex + this.charaLen - 1) % this.charaLen;
-      } while (!this.currentPlayer.alive);
+      if (this.currentPlayer.index === this.anchor.index && this.phase === 'ready') {
+        this.currentPlayer.active = true;
+      } else {
+        do {
+          this.currentPlayerIndex = (this.currentPlayerIndex + this.charaLen - 1) % this.charaLen;
+        } while (!this.currentPlayer.alive);
 
-      this.currentPlayer.active = true;
+        this.currentPlayer.active = true;
 
-      this.currentPlayer.special.desc = this.currentPlayer.special.desc || this.currentPlayer.special.func.desc;
+        this.currentPlayer.special.desc = this.currentPlayer.special.desc || this.currentPlayer.special.func.desc;
 
-      this.command = (this.command && this.command.type === 'default') ? this.command : this.currentPlayer.special;
+        this.command = (this.command && this.command.type === 'default') ? this.command : this.currentPlayer.special;
+      }
+
+      this.phase = 'select';
     },
 
     reset() {
@@ -170,26 +180,20 @@ export default {
     },
 
     handleSelect(target) {
-      if(this.phase === 'attack') {
+      if(this.phase !== 'select') {
         return;
       }
 
-      let anchor = _.findLast(this.playerArr, { party: this.currentPartyIndex, alive: true });
-
-      let attacker = this.playerArr[this.currentPlayerIndex];
-
       let attack = {
-        attacker: attacker,
+        attacker: this.currentPlayer,
         target: target,
-        command: this.command || attacker.special,
+        command: this.command || this.currentPlayer.special,
       };
 
       this.attackArr.push(attack);
 
-      if(attacker.index === anchor.index) {
-        this.phase = 'attack',
-
-        this.attack();
+      if(this.currentPlayer.index === this.anchor.index) {
+        this.phase = 'ready';
         return;
       } else {
         this.next();
@@ -198,13 +202,6 @@ export default {
 
     handleCommand(command) {
       this.command = command;
-    },
-
-    handleBack() {
-      let attackArr = this.attackArr;
-      attackArr.pop();
-
-      this.back();
     },
   },
   computed: {
@@ -216,9 +213,18 @@ export default {
     currentPlayer() {
       return this.playerArr[this.currentPlayerIndex];
     },
+    anchor() {
+      return _.findLast(this.playerArr, {
+        party: this.currentPartyIndex,
+        alive: true,
+      });
+    },
     special() {
       return this.currentPlayer.special;
-    }
+    },
+    isReady() {
+      return this.phase === 'ready';
+    },
   },
   mounted() {
     let shuffleNameArr = _.shuffle(nameArr);

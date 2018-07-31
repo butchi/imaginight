@@ -2,7 +2,7 @@
 .command-history
   .back(
     v-if="attackArr.length"
-    v-on:click="handleBack"
+    v-on:click="back"
   )
     i.fa.fa-undo(aria-hidden="true")
   .history(v-for="attack in attackArr")
@@ -11,14 +11,21 @@
         | {{ attack.command.name }}: {{ attack.command.desc || attack.command.func.desc }}
         i.fa.fa-long-arrow-right(aria-hidden="true")
           | {{ attack.target.name }}
+  button(
+    v-if="isReady"
+    v-on:click="attack"
+  )
+    | 実行
 </template>
 
 <script>
 export default {
   name: 'command-history',
   props: {
-    handleBack: Function,
+    back: Function,
     attackArr: Array,
+    isReady: Boolean,
+    attack: Function,
   },
   computed: {
   },
