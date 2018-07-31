@@ -232,6 +232,8 @@ export default {
 
       player.index = i;
 
+      player.order = i % 4;
+
       player.party = i < 4 ? 0 : 1;
 
       player.active = false;
@@ -257,10 +259,8 @@ export default {
 .stage {
   position: absolute;
 
-  left: 0;
+  left: px(10);
   top: px(50);
-
-  width: px(1200);
 
   &[data-phase="select"] {
     .player:hover {
@@ -268,8 +268,6 @@ export default {
       cursor: pointer;
     }
   }
-
-  margin-top: px(20);
 
   .player[data-attacking="1"] {
     transform: translateY(px(-20));

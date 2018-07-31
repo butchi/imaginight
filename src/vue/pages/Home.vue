@@ -32,6 +32,6 @@ export default {
   margin: 0 px(10);
 
   font-family: $cursive;
-  font-size: px(48);
+  font-size: px(30);
 }
 </style>

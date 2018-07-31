@@ -32,22 +32,24 @@ export default {
 .command-index {
   position: absolute;
 
-  left: px(920);
+  left: px(650);
   top: px(0);
+
+  width: px(200);
 
   .command {
     + .command {
-      margin-top: px(10);
+      margin-top: px(7);
     }
   }
 
   .job {
     font-weight: bold;
-    font-size: px(16);
+    font-size: px(11);
   }
 
   .desc {
-    font-size: px(10);
+    font-size: px(7);
   }
 }
 </style>

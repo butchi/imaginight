@@ -37,8 +37,5 @@ export default {
 
   left: 0;
   top: px(0);
-
-  // MAGIC NUMBER: 4つに区切る
-  width: px(1000);
 }
 </style>

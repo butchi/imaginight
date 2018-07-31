@@ -3,6 +3,7 @@
   v-if="player"
   v-bind:data-alive="alive ? 1 : 0"
   v-bind:data-party="party ? 1 : 0"
+  v-bind:data-order="order"
   v-bind:data-active="active ? 1 : 0"
   v-bind:data-attacked="attacked ? 1 : 0"
   v-on:click="handleSelect(player)"
@@ -43,7 +44,10 @@ export default {
   },
   computed: {
     party() {
-      return 0;
+      return this.player.party;
+    },
+    order() {
+      return this.player.order;
     },
     name() {
       return this.player.name;
@@ -86,15 +90,13 @@ export default {
 @import "common";
 
 .player {
-  position: relative;
+  position: absolute;
 
-  width: px(206);
-  height: px(304);
+  width: px(150);
+  height: px(230);
   float: left;
 
-  margin: px(10) px(10);
-
-  padding: px(10);
+  padding: px(7);
 
   box-shadow: px(1) px(1) px(3) #ccc;
 
@@ -112,18 +114,28 @@ export default {
     left: px(-4);
     top: px(-4);
 
-    width: px(206);
-    height: px(304);
+    width: px(146);
+    height: px(226);
 
     border: px(2) solid;
   }
 
+  @for $i from 0 to 4 {
+    &[data-order="#{$i}"] {
+      left: px($i * 160);
+    }
+  }
+
   &[data-party="0"] {
+    top: px(0);
+
     &::after {
       border-color: #99f;
     }
   }
   &[data-party="1"] {
+    top: px(260);
+
     &::after {
       border-color: #f99;
     }
@@ -154,42 +166,45 @@ export default {
   .name {
     margin: 0;
 
-    font-size: px(20);
+    font-size: px(14);
   }
 
   .job {
-    font-size: px(12);
+    font-size: px(8);
     font-weight: bold;
     color: $gray;
   }
 
   .hp {
     margin-top: px(5);
-    font-size: px(14);
+    font-size: px(9);
 
     .fa {
-      width: 0.15rem;
+      width: 0.1rem;
       text-align: center;
     }
   }
 
   .special {
-    font-size: px(14);
+    font-size: px(8);
 
     .fa {
-      width: 0.15rem;
+      width: 0.1rem;
       text-align: center;
     }
   }
 
   .map-hp {
-    position: relative;
+    position: absolute;
 
-    width: px(181);
-    height: px(181);
+    left: px(8);
+    bottom: px(8);
+
+    width: px(127);
+    height: px(127);
 
     background-image: image-url("grid.png");
-    background-size: cover;
+    background-size: px(127);
     background-repeat: no-repeat;
 
     font-size: 0;
@@ -197,11 +212,11 @@ export default {
     &.center {
       position: absolute;
 
-      left: px(80);
-      top: px(80);
+      left: px(56);
+      top: px(56);
 
-      width: px(19);
-      height: px(19);
+      width: px(13);
+      height: px(13);
 
       background-color: #f99;
 
@@ -217,9 +232,9 @@ export default {
     .cur {
       position: absolute;
 
-      width: px(21);
-      height: px(21);
-      border-radius: px(21);
+      width: px(15);
+      height: px(15);
+      border-radius: px(15);
 
       background-color: #000;
 
@@ -229,7 +244,7 @@ export default {
     @for $x from -4 through 4 {
       &[data-hp-real="#{$x}"] {
         .cur {
-          left: px(($x + 4) * 20);
+          left: px(($x + 4) * 14);
         }
       }
     }
@@ -237,7 +252,7 @@ export default {
     @for $y from -4 through 4 {
       &[data-hp-imag="#{$y}"] {
         .cur {
-          top: px((- $y + 4) * 20);
+          top: px((- $y + 4) * 14);
         }
       }
     }
