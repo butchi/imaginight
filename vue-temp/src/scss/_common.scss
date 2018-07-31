@@ -2,3 +2,7 @@
 @import "variable";
 @import "function";
 @import "mixin";
+
+* {
+  box-sizing: border-box;
+}

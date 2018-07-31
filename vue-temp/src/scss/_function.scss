@@ -1,3 +1,11 @@
+$rem-per-px : 100;
+
+@function px($size) {
+  @return #{$size / $rem-per-px}rem;
+}
+
 @function image-url ($url) {
     @return url("#{$img_dir}#{$url}");
 }
+
+$base-font-size: px(14);

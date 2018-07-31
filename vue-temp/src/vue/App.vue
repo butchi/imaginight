@@ -1,15 +1,15 @@
 <template lang="pug">
 .app
-    Home
+  Home
 </template>
 
 <script>
 import Home from '@/vue/pages/Home.vue'
 
 export default {
-    name: "app",
-    components: {
-        Home,
-    }
+  name: "app",
+  components: {
+    Home,
+  }
 }
 </script>

@@ -1,4 +1,12 @@
+html {
+  font-size: #{$rem-per-px * 0.7}px;
+}
+
 body {
-    // 文字サイズの自動調整を無効にする
-    text-size-adjust: 100%;
+  // 文字サイズの自動調整を無効にする
+  text-size-adjust: 100%;
+
+  font-size: $base-font-size;
+
+  line-height: 1.618;
 }
