@@ -36,11 +36,11 @@ export default {
   },
   computed: {
     currentKey() {
-      return this.command.id || 'special';
+      return this.command.id || 'auto';
     },
   },
   mounted() {
-    this.handleChange('special');
+    this.handleChange('auto');
   },
 }
 </script>
@@ -58,48 +58,54 @@ export default {
 
   font-size: px(10);
 
+  .auto {
+    position: absolute;
+    left: px(0);
+    top: px(0);
+  }
+
   .left {
     position: absolute;
     left: px(0);
-    top: px(20);
+    top: px(40);
   }
 
   .right {
     position: absolute;
     left: px(100);
-    top: px(20);
+    top: px(40);
   }
 
   .down {
     position: absolute;
     left: px(50);
-    top: px(40);
+    top: px(60);
   }
 
   .up {
     position: absolute;
     left: px(50);
-    top: px(0);
+    top: px(20);
   }
 
   .restore {
     position: absolute;
     left: px(50);
-    top: px(20);
+    top: px(40);
   }
 
   .special {
     position: absolute;
 
     left: 0;
-    top: px(60);
+    top: px(80);
   }
 
   .desc {
     position: absolute;
 
     left: 0;
-    top: px(80);
+    top: px(100);
   }
 }
 </style>

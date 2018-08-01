@@ -57,7 +57,7 @@ function attack(opts = {}) {
 
   if(condition({ target, attacker })) {
     return {
-      hp: calc(),
+      hp: calc({ target, attacker }),
     };
   } else {
     return ({});
@@ -90,6 +90,41 @@ function arithmetic(opts = {}) {
 
 const commandLi = {
   defaultAbility: {
+    auto: {
+      "id": 'auto',
+      "type": 'default',
+      "name": "オート",
+      "func": specialFunc({
+        calc: (opts) => {
+          const hp = Complex(opts.target.hp);
+          const re = hp.re;
+          const im = hp.im;
+
+          let tmp;
+
+          if (Math.abs(re) > Math.abs(im)) {
+            if (re === 0) {
+              tmp = hp;
+            } else if (re > 0) {
+              tmp = CMath.sub(hp, Complex([1, 0]))
+            } else if (re < 0) {
+              tmp = CMath.sum(hp, Complex([1, 0]))
+            }
+          } else {
+            if (im === 0) {
+              tmp = hp;
+            } else if (im > 0) {
+              tmp = CMath.sub(hp, Complex([0, 1]))
+            } else if (re < 0) {
+              tmp = CMath.sum(hp, Complex([0, 1]))
+            }
+          }
+
+          let ret = [tmp.re, tmp.im];
+          return ret;
+        },
+      }),
+    },
     left: {
       "id": 'left',
       "type": 'default',
