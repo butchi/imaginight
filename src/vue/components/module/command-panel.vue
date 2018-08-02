@@ -36,11 +36,11 @@ export default {
   },
   computed: {
     currentKey() {
-      return this.command.id || 'auto';
+      return this.command.id || 'special';
     },
   },
   mounted() {
-    this.handleChange('auto');
+    this.handleChange('special');
   },
 }
 </script>
