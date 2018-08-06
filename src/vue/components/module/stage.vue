@@ -24,6 +24,8 @@
 <script>
 import _ from 'lodash';
 
+import { mapState, mapActions, mapGetters } from 'vuex';
+
 import Complex from "@/js/lib/complex"
 import { characterLi, nameArr } from '@/js/lib/character-list';
 import commandLi from '@/js/lib/command-list';
@@ -45,7 +47,6 @@ export default {
   data() {
     return {
       charaLen: 8,
-      playerArr: [],
       currentPartyIndex: 0,
       currentPlayerIndex: 0,
       attackArr: [],
@@ -54,6 +55,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions([ 'updatePlayerArr' ]),
     next() {
       if(this.currentPlayer) {
         this.currentPlayer.active = false;
@@ -205,6 +207,7 @@ export default {
     },
   },
   computed: {
+    ...mapState([ 'playerArr' ]),
     ability() {
       const ability = commandLi.defaultAbility;
       ability.special = this.special;
@@ -227,6 +230,8 @@ export default {
     },
   },
   mounted() {
+    const playerArr = [];
+
     let shuffleNameArr = _.shuffle(nameArr);
 
     for(let i = 0; i < this.charaLen; i++) {
@@ -248,8 +253,10 @@ export default {
 
       player.attacked = false;
 
-      this.playerArr.push(player);
+      playerArr.push(player);
     }
+
+    this.updatePlayerArr(playerArr);
 
     let player = this.playerArr[this.currentPlayerIndex];
     player.active = true;
